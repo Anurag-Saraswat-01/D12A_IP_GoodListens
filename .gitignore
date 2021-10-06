@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/good-listens/node_modules
+/good-listens/.pnp
+/good-listens/.pnp.js
+
+# testing
+/good-listens/coverage
+
+# production
+/good-listens/build
+
+# misc
+/good-listens/.DS_Store
+/good-listens/.env.local
+/good-listens/.env.development.local
+/good-listens/.env.test.local
+/good-listens/.env.production.local
+
+/good-listens/npm-debug.log*
+/good-listens/yarn-debug.log*
+/good-listens/yarn-error.log*
