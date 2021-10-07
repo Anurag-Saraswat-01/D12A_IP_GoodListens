@@ -13,5 +13,6 @@ async function getData(track, artist) {
         }
     })
     data = await response.json()
-    console.log(data)
+    console.log(data.track)
+    console.log(data.track.album.title, data.track.album.image[1]["#text"], data.track.artist.name, data.track.name, data.track.url)
 }
