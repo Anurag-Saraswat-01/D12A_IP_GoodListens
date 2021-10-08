@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.navbar {
+  padding: 0 !important;
+}
+
+.navbar-brand {
+  font-size: 32px !important;
+}
+
+.nav {
+  gap: 25px;
+}
+
+.nav-link {
+  font-size: 25px;
+}
+
+.d-flex {
+  height: 40px;
+  margin-top: 10px;
+}
