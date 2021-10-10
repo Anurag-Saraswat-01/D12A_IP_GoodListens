@@ -1,10 +1,13 @@
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+
 
 const Header = ({ logo }) => {
+
     return (
         <Navbar className="navbar" bg="dark" variant="dark">
-            <Container>
+            <Container className="container-fluid">
                 <Navbar.Brand className="navbar-brand" href="#home">
                     <img
                         alt=""
@@ -21,6 +24,7 @@ const Header = ({ logo }) => {
                     <Nav className="nav justify-content-end" >
                         <Nav.Link className="nav-link" href="#home" >Home</Nav.Link>
                         <Nav.Link className="nav-link" href="#link" >About</Nav.Link>
+                        <Nav.Link className="nav-link" href="#home" >SignIn</Nav.Link>
                         <Form className="d-flex" >
                             <FormControl
                                 type="search"

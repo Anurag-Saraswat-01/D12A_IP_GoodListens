@@ -37,3 +37,17 @@ code {
   height: 40px;
   margin-top: 10px;
 }
+
+.center {
+  text-align: center;
+  color: white;
+}
+
+.row {
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.col-md-3 {
+  margin-top: 10px;
+}

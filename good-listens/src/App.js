@@ -1,14 +1,16 @@
 import Header from './components/Header'
 import logo from './images/logo.png';
-import bgimage from './images/music2.jpg';
+import Table from "./components/Table";
+import rock from "./images/rock.jpg";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+
 
 function App() {
   return (
     <div className="container-fluid">
       <Header logo={logo} />
-      <div className="bg-image">
-        <img src={bgimage} alt="" width="100%" height="auto" />
-      </div>
+      <Table rock = {rock} />
     </div>
   );
 }
