@@ -33,7 +33,7 @@ code {
   font-size: 25px;
 }
 
-.d-flex {
+.d-flex, .log-btn {
   height: 40px;
   margin-top: 10px;
 }

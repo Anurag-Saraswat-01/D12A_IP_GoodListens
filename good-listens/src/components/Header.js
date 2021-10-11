@@ -1,21 +1,43 @@
+import { useState, useEffect } from 'react';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import firebase, { auth, provider, getAuth } from './Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
-
 
 const Header = ({ logo }) => {
+    const [user, setUser] = useState(null)
+
+    const login = () => {
+        auth.signInWithPopup(getAuth, provider)
+            .then((result) => {
+                const user = result.user
+                setUser(user)
+            })
+        console.log(user)
+    }
+
+    const logout = () => {
+        auth.signOut(getAuth)
+            .then(() => {
+                setUser(null)
+            })
+        console.log(user)
+    }
+
+    // so that user remains logged in after refresh
+    useEffect(() => {
+        auth.onAuthStateChanged(getAuth, (user) => {
+            if (user) {
+                setUser(user)
+            }
+        })
+    })
 
     return (
         <Navbar className="navbar" bg="dark" variant="dark">
             <Container className="container-fluid">
                 <Navbar.Brand className="navbar-brand" href="#home">
-                    <img
-                        alt=""
-                        src={logo}
-                        width="100"
-                        height="100"
-                        className="d-inline-block align-center"
-                    />{' '}
+                    <img alt="Good Listens Logo" src={logo} width="100" height="100" className="d-inline-block align-center" />
+                    {' '}
                     GoodListens
                 </Navbar.Brand>
 
@@ -24,7 +46,12 @@ const Header = ({ logo }) => {
                     <Nav className="nav justify-content-end" >
                         <Nav.Link className="nav-link" href="#home" >Home</Nav.Link>
                         <Nav.Link className="nav-link" href="#link" >About</Nav.Link>
-                        <Nav.Link className="nav-link" href="#home" >SignIn</Nav.Link>
+                        {user ?
+                            // <Nav.Link className="nav-link" onClick={() => logout} >SignOut</Nav.Link> 
+                            <Button variant="outline-light" className="log-btn" onClick={() => logout()} > Sign Out </Button> :
+                            <Button variant="outline-light" className="log-btn" onClick={() => login()} > Sign In </Button>
+                            // <Nav.Link className="nav-link" onClick={console.log('sign out')} >SignIn</Nav.Link>
+                        }
                         <Form className="d-flex" >
                             <FormControl
                                 type="search"
@@ -36,7 +63,7 @@ const Header = ({ logo }) => {
                         </Form>
                     </Nav>
                 </Navbar.Collapse>
-                
+
             </Container>
         </Navbar>
     )
