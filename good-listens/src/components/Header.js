@@ -1,37 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
-import firebase, { auth, provider, getAuth } from './Firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Header = ({ logo }) => {
-    const [user, setUser] = useState(null)
-
-    const login = () => {
-        auth.signInWithPopup(getAuth, provider)
-            .then((result) => {
-                const user = result.user
-                setUser(user)
-            })
-        console.log(user)
-    }
-
-    const logout = () => {
-        auth.signOut(getAuth)
-            .then(() => {
-                setUser(null)
-            })
-        console.log(user)
-    }
-
-    // so that user remains logged in after refresh
-    useEffect(() => {
-        auth.onAuthStateChanged(getAuth, (user) => {
-            if (user) {
-                setUser(user)
-            }
-        })
-    })
-
+const Header = ({logo, user, login, logout}) => {
     return (
         <Navbar className="navbar" bg="dark" variant="dark">
             <Container className="container-fluid">
