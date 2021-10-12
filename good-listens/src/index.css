@@ -1,3 +1,10 @@
+:root {
+  --navbar-color: #082032;
+  --bg-color: #2C394B;
+  --table-color: #334756;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -12,6 +19,10 @@ code {
     monospace;
 }
 
+.container {
+  padding: 0;
+}
+
 .container-fluid {
   padding-left: 0 !important;
   padding-right: 0 !important;
@@ -19,6 +30,7 @@ code {
 
 .navbar {
   padding: 0 !important;
+  background-color: var(--navbar-color) !important;
 }
 
 .navbar-brand {
@@ -45,9 +57,67 @@ code {
 
 .row {
   justify-content: space-between;
-  margin-left: 20px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.tableContainer {
+  padding: 3.5% 0;
+  margin: 0 auto;
+  width: 90%;
+  background-color: var(--table-color);
+}
+
+.bodyContainer {
+  padding: 3.5%;
+  background-color: var(--bg-color);
 }
 
 .col-md-3 {
-  margin-top: 10px;
+  width: 23.5%;
+  margin: 1% 0;
+  /* margin-top: 2.5%; */
+  /* margin-left: 13px;
+  margin-right: 13px; */
+  padding: 0;
+}
+
+.card {
+  width: 100% !important;
+  border: none;
+}
+
+.card-body {
+  background-color: var(--navbar-color) !important;
+}
+
+/*Card VIew*/
+.view
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+}
+
+.card-component
+{
+    background-color: hsl(244, 38%, 16%);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    border-radius: 1rem;
+}
+.card-text 
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5%;
+}
+.card-img
+{
+    border-radius: 1rem;
+    background-color: purple;
 }

@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import firebase, { auth, provider, getAuth } from './components/Firebase';
 import { useState, useEffect } from 'react';
+import CardView from './components/CardView';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -13,8 +14,10 @@ function App() {
   const login = () => {
     auth.signInWithPopup(getAuth, provider)
       .then((result) => {
-        const user = result.user
-        setUser(user)
+        if (result.user) {
+          const user = result.user
+          setUser(user)  
+        }
       })
     console.log(user)
   }
@@ -40,6 +43,7 @@ function App() {
     <div className="container-fluid">
       <Header logo={logo} user={user} login={login} logout={logout} />
       <Table rock={rock} />
+      {/* <CardView  rock={rock} /> */}
     </div>
   );
 }

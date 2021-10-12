@@ -18,8 +18,8 @@ const Header = ({logo, user, login, logout}) => {
                         <Nav.Link className="nav-link" href="#link" >About</Nav.Link>
                         {user ?
                             // <Nav.Link className="nav-link" onClick={() => logout} >SignOut</Nav.Link> 
-                            <Button variant="outline-light" className="log-btn" onClick={() => logout()} > Sign Out </Button> :
-                            <Button variant="outline-light" className="log-btn" onClick={() => login()} > Sign In </Button>
+                            <Nav.Link className="nav-link" onClick={logout} > Sign Out </Nav.Link> :
+                            <Nav.Link className="nav-link" onClick={login} > Sign In </Nav.Link>
                             // <Nav.Link className="nav-link" onClick={console.log('sign out')} >SignIn</Nav.Link>
                         }
                         <Form className="d-flex" >
