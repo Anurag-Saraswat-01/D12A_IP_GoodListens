@@ -5,7 +5,7 @@ import CardView from "./CardView";
 
 const Table = ({ rock }) => {
 
-  const [click, setClick] = useState(false);
+  const [click, setClick] = useState(NaN);
   const arr = [
     {
       name: "In The End",
@@ -25,10 +25,11 @@ const Table = ({ rock }) => {
   ];
 
 
-  const card = arr.map((data) => {
+  const card = arr.map((data, key) => {
+    console.log(isNaN(click))
     return (
-      <div className="col-md-3">
-        <Card>
+      <div className="col-md-3" key={key}>
+        <Card onClick={() => setClick(key)} >
           <Card.Img variant="top" src={rock} />
           <Card.Body className="bg-dark">
             <Card.Title className="center">{data.name}</Card.Title>
@@ -43,7 +44,7 @@ const Table = ({ rock }) => {
       <div className="tableContainer">
         <div className="row">{card}</div>
       </div>
-      <CardView rock ={rock}/>
+      <CardView rock ={rock} click={click} setClick={setClick} data={arr} />
     </div>
   );
 };

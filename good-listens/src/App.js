@@ -1,4 +1,5 @@
 import Header from './components/Header'
+import Footer from './components/Footer'
 import logo from './images/logo.png';
 import Table from "./components/Table";
 import rock from "./images/rock.jpg";
@@ -44,6 +45,7 @@ function App() {
       <Header logo={logo} user={user} login={login} logout={logout} />
       <Table rock={rock} />
       {/* <CardView  rock={rock} /> */}
+      <Footer/>
     </div>
   );
 }
