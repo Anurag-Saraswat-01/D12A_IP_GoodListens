@@ -72,7 +72,7 @@ code {
   background-color: var(--bg-color);
   /* changed here */
   position: relative; /* for overlay */
-  height: 115vh; /* fix this */
+  /* height: 115vh; fix this */
 }
 
 .tableContainer {
@@ -81,8 +81,8 @@ code {
   width: 90%;
   background-color: var(--table-color);
   /* changed here */
-  position: absolute; /* for overlay */
-  left: 5%; /* to center */
+  /* position: absolute; for overlay */
+  /* left: 5%; to center */
 }
 
 .col-md-3 {
@@ -117,7 +117,8 @@ code {
     position: absolute; /* for overlay */
     /* border: 5px solid yellow; visibility */
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    top: 0;
 }
 
 .card-component
