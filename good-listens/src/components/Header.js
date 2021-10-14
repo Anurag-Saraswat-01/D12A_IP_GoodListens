@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchBar from './SearchBar'
 
 const Header = ({logo, user, login, logout, setInput, search}) => {
     return (
@@ -22,7 +23,7 @@ const Header = ({logo, user, login, logout, setInput, search}) => {
                             <Nav.Link className="nav-link" onClick={login} > Sign In </Nav.Link>
                             // <Nav.Link className="nav-link" onClick={console.log('sign out')} >SignIn</Nav.Link>
                         }
-                        <form onSubmit={search}> 
+                        {/* <form onSubmit={search}> 
                             <Form className="d-flex" >
                                 <FormControl onChange={(e)=>setInput(e.target.value)}
                                     type="search"
@@ -32,7 +33,9 @@ const Header = ({logo, user, login, logout, setInput, search}) => {
                                 />
                                 <Button type="submit" variant="outline-light">Search</Button>
                             </Form>
-                        </form>
+                        </form> */}
+
+                        <SearchBar SearchBar = {SearchBar} />
                     </Nav>
                 </Navbar.Collapse>
 

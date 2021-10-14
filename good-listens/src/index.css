@@ -141,3 +141,44 @@ code {
     border-radius: 1rem;
     background-color: purple;
 }
+
+/* search songs  */
+
+.searchInputs {
+  margin-top: 15px;
+  display: flex;
+}
+
+.search input {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px;
+  border-radius: 2px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  font-size: 20px;
+  padding: 6px 15px;
+  height: 30px;
+  width: 260px;
+  color: #CAF7E3;
+  
+}
+
+/* .searchIcon {
+  height: 30px;
+  width: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  display: grid;
+  place-items: center;
+} */
+
+input:focus {
+  outline: none;
+}
+/* .searchIcon svg {
+  font-size: 25px;
+  color: #28DF99;
+} */
+
+.searchBar:focus {
+  border-bottom: 1px solid white;
+}
