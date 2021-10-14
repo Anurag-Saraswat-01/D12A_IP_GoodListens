@@ -111,43 +111,87 @@ code {
 /*Card VIew*/
 .view
 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* padding: 10%; */
-    /* changed here */
-    background-color: rgba(0, 0, 0, 0.6); /* for opaque bg */
-    position: absolute; /* for overlay */
-    /* border: 5px solid yellow; visibility */
-    width: 100%;
-    height: 100%;
-    top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10%; */
+  /* changed here */
+  background-color: rgba(0 0 0 / 0.5); /* for opaque bg */
+  position: absolute; /* for overlay */
+  /* border: 5px solid yellow; visibility */
+  width: 100%;
+  height: 100%;
+  top: 0;
 }
 
 .card-component
 {
-    background-color: hsl(244, 38%, 16%);
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    border-radius: 1rem;
-    margin:  -40px auto auto;
+  background-color: hsl(244, 38%, 16%);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  border-radius: 1rem;
+  margin:  -40px auto auto;
+  width: 65%;
+  box-shadow: 0 3px 10px rgb(0 0 0/ 0.8);
 }
 
 .card-text 
 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 5%;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5% 5%;
+  color: white;
+  width: 50%;
 }
 
-.card-img
+.song-header h6 {
+  font-size: 14px;
+  /* font-weight: 400; */
+  color: hsl(260, 4%, 65%)
+}
+
+.rating-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: auto 0;
+  gap: 5px;
+}
+
+.ratings p {
+  height: 24px;
+  margin: auto 0;
+}
+
+.play-icon-wrapper {
+  background-color: var(--table-color);
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  margin-left: 85%;
+  margin-top: -5%;
+}
+
+.play-icon {
+  color: orange;
+  height: 30px;
+  width: 30px;
+  margin: auto;
+}
+
+.card-img-wrapper
 {
-    border-radius: 1rem;
-    background-color: purple;
+  border-radius: 1rem;
+  background-color: purple;
+  width: 50%;
+}
+
+.card-img {
+  border-radius: 1rem 0 0 1rem;
 }
 
 .closeIcon {
