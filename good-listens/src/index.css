@@ -72,7 +72,7 @@ code {
   background-color: var(--bg-color);
   /* changed here */
   position: relative; /* for overlay */
-  height: 100vh; /* fix this */
+  /* height: 115vh; fix this */
 }
 
 .tableContainer {
@@ -81,8 +81,8 @@ code {
   width: 90%;
   background-color: var(--table-color);
   /* changed here */
-  position: absolute; /* for overlay */
-  left: 5%; /* to center */
+  /* position: absolute; for overlay */
+  /* left: 5%; to center */
 }
 
 .col-md-3 {
@@ -111,13 +111,18 @@ code {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10%;
+    /* padding: 10%; */
     /* changed here */
     background-color: rgba(0, 0, 0, 0.6); /* for opaque bg */
     position: absolute; /* for overlay */
+<<<<<<< HEAD
     border: 5px solid yellow; /* visibility */
+=======
+    /* border: 5px solid yellow; visibility */
+>>>>>>> 15d0857876275d6efc6c8165aa9b57dda05a938b
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    top: 0;
 }
 
 .card-component
@@ -127,7 +132,9 @@ code {
     align-items: stretch;
     justify-content: center;
     border-radius: 1rem;
+    margin:  -40px auto auto;
 }
+
 .card-text 
 {
     display: flex;
@@ -136,12 +143,14 @@ code {
     padding: 5%;
     color: white;
 }
+
 .card-img
 {
     border-radius: 1rem;
     background-color: purple;
 }
 
+<<<<<<< HEAD
 /* stacking */
 .child {
   position: absolute;
@@ -152,3 +161,45 @@ code {
 /* .parent {
   position: relative;
 } */
+=======
+.closeIcon {
+  color: white;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  margin: 2% 2% auto auto;
+}
+
+/* search songs  */
+
+.searchInputs {
+  margin-top: 15px;
+  display: flex;
+}
+
+.search input {
+  background-color: inherit;
+  border-radius: 2px;
+  border: none;
+  font-size: 20px;
+  padding: 6px 15px;
+  height: 30px;
+  width: 60%;
+  color: #CAF7E3;
+}
+
+.searchIcon {
+  height: 20px;
+  width: 20px;
+  color: white;
+  margin-top: 5px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.searchBar:focus {
+  border-bottom: 1px solid white;
+}
+>>>>>>> 15d0857876275d6efc6c8165aa9b57dda05a938b

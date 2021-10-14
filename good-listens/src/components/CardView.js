@@ -1,10 +1,11 @@
-import { Button } from "react-bootstrap";
+import { FaRegWindowClose } from "react-icons/fa"
 
 const CardView = ({ rock, click, setClick, data }) => {
   return (
     <div className="view child" 
     style={{display: `${isNaN(click) ? "none" : "flex"}`}}>
-      <Button className="bg-danger" onClick={() => setClick(NaN)} > Close </Button>
+      {/* <Button className="bg-danger" onClick={() => setClick(NaN)} > Close </Button> */}
+      <FaRegWindowClose className="closeIcon" onClick={() => setClick(NaN)} />
       <div className="card-component">
         <div className="card-img">
           <img alt="Rock-img" src={rock} width="400" className="" />
