@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Header = ({logo, user, login, logout}) => {
+const Header = ({logo, user, login, logout, setInput, search}) => {
     return (
         <Navbar className="navbar" bg="dark" variant="dark">
             <Container className="container-fluid">
@@ -22,15 +22,17 @@ const Header = ({logo, user, login, logout}) => {
                             <Nav.Link className="nav-link" onClick={login} > Sign In </Nav.Link>
                             // <Nav.Link className="nav-link" onClick={console.log('sign out')} >SignIn</Nav.Link>
                         }
-                        <Form className="d-flex" >
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-light">Search</Button>
-                        </Form>
+                        <form onSubmit={search}> 
+                            <Form className="d-flex" >
+                                <FormControl onChange={(e)=>setInput(e.target.value)}
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                />
+                                <Button type="submit" variant="outline-light">Search</Button>
+                            </Form>
+                        </form>
                     </Nav>
                 </Navbar.Collapse>
 
