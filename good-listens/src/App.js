@@ -43,6 +43,7 @@ function App() {
 
   const search = () => {
   }
+  
   return (
     <div className="container-fluid">
       <Header logo={logo} user={user} login={login} logout={logout} setInput={setInput} />
