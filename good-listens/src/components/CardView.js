@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 
 const CardView = ({ rock, click, setClick, data }) => {
   return (
-    <div className="view" 
+    <div className="view child" 
     style={{display: `${isNaN(click) ? "none" : "flex"}`}}>
       <Button className="bg-danger" onClick={() => setClick(NaN)} > Close </Button>
       <div className="card-component">

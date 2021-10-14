@@ -44,7 +44,9 @@ const Table = ({ rock }) => {
       <div className="tableContainer">
         <div className="row">{card}</div>
       </div>
-      <CardView rock ={rock} click={click} setClick={setClick} data={arr} />
+      <div className="parent">
+        <CardView rock ={rock} click={click} setClick={setClick} data={arr} />
+      </div>
     </div>
   );
 };
