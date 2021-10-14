@@ -45,10 +45,14 @@ code {
   font-size: 25px;
 }
 
+/* footer  */
+
 .footer {
   background-color: var(--navbar-color) !important;
   color: white;
   text-align: center;
+  margin: auto;
+  padding: 2% 15%;
 }
 
 .d-flex, .log-btn {
