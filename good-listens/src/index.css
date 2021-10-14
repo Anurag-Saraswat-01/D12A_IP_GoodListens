@@ -115,11 +115,7 @@ code {
     /* changed here */
     background-color: rgba(0, 0, 0, 0.6); /* for opaque bg */
     position: absolute; /* for overlay */
-<<<<<<< HEAD
-    border: 5px solid yellow; /* visibility */
-=======
     /* border: 5px solid yellow; visibility */
->>>>>>> 15d0857876275d6efc6c8165aa9b57dda05a938b
     width: 100%;
     height: 100%;
     top: 0;
@@ -150,18 +146,6 @@ code {
     background-color: purple;
 }
 
-<<<<<<< HEAD
-/* stacking */
-.child {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* .parent {
-  position: relative;
-} */
-=======
 .closeIcon {
   color: white;
   height: 30px;
@@ -202,4 +186,3 @@ input:focus {
 .searchBar:focus {
   border-bottom: 1px solid white;
 }
->>>>>>> 15d0857876275d6efc6c8165aa9b57dda05a938b
