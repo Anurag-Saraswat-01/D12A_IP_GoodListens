@@ -1,9 +1,8 @@
 import { Card } from "react-bootstrap";
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import CardView from "./CardView";
 
-const Table = ({ rock }) => {
+const Table = ({ rock, dataArr }) => {
 
   const [click, setClick] = useState(NaN);
   const arr = [
@@ -24,13 +23,13 @@ const Table = ({ rock }) => {
     },
   ];
 
-
-  const card = arr.map((data, key) => {
-    console.log(isNaN(click))
+  const card = dataArr.map((data, key) => {
+    // console.log((isNaN(click)))
+    // console.log(data.id)
     return (
       <div className="col-md-3" key={key}>
         <Card onClick={() => setClick(key)} >
-          <Card.Img variant="top" src={rock} />
+          <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark">
             <Card.Title className="center">{data.name}</Card.Title>
           </Card.Body>
@@ -39,13 +38,14 @@ const Table = ({ rock }) => {
     );
   });
 
+
   return (
     <div className="container-fluid bodyContainer">
       <div className="tableContainer">
         <div className="row">{card}</div>
       </div>
       <div className="parent">
-        <CardView rock ={rock} click={click} setClick={setClick} data={arr} />
+        <CardView rock={rock} click={click} setClick={setClick} data={dataArr} />
       </div>
     </div>
   );

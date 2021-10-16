@@ -6,6 +6,7 @@ const CardView = ({ rock, click, setClick, data }) => {
     console.log(newrating)
   }
 
+  // console.log(data)
   return (
     <div className="view child"
       style={{ display: `${isNaN(click) ? "none" : "flex"}` }}>
@@ -13,13 +14,13 @@ const CardView = ({ rock, click, setClick, data }) => {
       <FaRegWindowClose className="closeIcon" onClick={() => setClick(NaN)} />
       <div className="card-component">
         <div className="card-img-wrapper">
-          <img alt="Rock-img" src={rock} className="card-img" />
+          <img alt="card-img" src={isNaN(click) ? '' : data[click].image} className="card-img" />
         </div>
         <div className="card-text">
           <div className="song-header">
             <h2> {isNaN(click) ? '' : data[click].name} </h2>
-            <h6> Artist - Linkin Park </h6>
-            <h6> Album - Hybrid Theory </h6>
+            <h6> Artist - {isNaN(click) ? '' : data[click].artist} </h6>
+            <h6> Album - {isNaN(click) ? '' : data[click].album} </h6>
             <h6>2000</h6>
           </div>
           <div className="ratings">
@@ -35,7 +36,7 @@ const CardView = ({ rock, click, setClick, data }) => {
             </div>
           </div>
           <div className="play-icon-wrapper">
-            <a href="" >
+            <a href={isNaN(click) ? '' : data[click].url} >
               <FaHeadphones className="play-icon" />
             </a>
           </div>
