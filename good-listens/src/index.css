@@ -234,3 +234,68 @@ input:focus {
 .searchBar:focus {
   border-bottom: 1px solid white;
 }
+
+
+/* about us  */
+
+.aboutUsContainer {
+  background-color: var(--table-color);
+  background-image: url("./images/album.jpg");
+  text-align: center;
+  background-size: 55%;
+  padding: 100px 0;
+}
+
+.innerContainer {
+  width: 55%;
+  float: right;
+  background-color: rgba(0 0 0 / 0.5);
+  color: #fdfdfd;
+  padding: 150px; 
+}
+
+.about {
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--table-color);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* .aboutUsContainer{
+  background-size: 55%;
+  background-color: #fdfdfd;
+  padding: 100px 0;
+} */
+
+.albumImage {
+  width: 55%;
+  height: 100vh;
+  float: left;
+}
+
+.innerContainer h1{
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: 900;  
+}
+
+.text {
+  font-size: 13px;
+  color: #fdfdfd;
+  line-height: 30px;
+  text-align: justify;
+  margin-bottom: 40px;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 900; 
+}
+
+

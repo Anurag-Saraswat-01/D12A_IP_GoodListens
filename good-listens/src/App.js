@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import firebase, { auth, provider, getAuth, database } from './components/Firebase';
 import { useState, useEffect } from 'react';
+import AboutUs from './components/AboutUs';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -78,6 +80,7 @@ function App() {
       <Header logo={logo} user={user} login={login} logout={logout} setInput={setInput} />
       <Table rock={rock} dataArr={data} />
       {/* <CardView  rock={rock} /> */}
+      <AboutUs />
       <Footer />
     </div>
   );
