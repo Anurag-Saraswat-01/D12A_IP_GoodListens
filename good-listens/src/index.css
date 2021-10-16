@@ -52,7 +52,7 @@ code {
   color: white;
   text-align: center;
   margin: auto;
-  padding: 2% 15%;
+  padding: 1%;
 }
 
 .d-flex, .log-btn {
@@ -111,20 +111,6 @@ code {
 /*Card VIew*/
 .view
 {
-<<<<<<< HEAD
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* padding: 10%; */
-    /* changed here */
-    background-color: rgba(0, 0, 0, 0.6); /* for opaque bg */
-    position: absolute; /* for overlay */
-    /* border: 5px solid yellow; visibility */
-    width: 100%;
-    height: 100%;
-    top: 0;
-=======
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +123,6 @@ code {
   width: 100%;
   height: 100%;
   top: 0;
->>>>>>> 5abd0c3f49accc8d3f0451303de5fc7278b274c2
 }
 
 .card-component
@@ -205,13 +190,10 @@ code {
   width: 50%;
 }
 
-<<<<<<< HEAD
-=======
 .card-img {
   border-radius: 1rem 0 0 1rem;
 }
 
->>>>>>> 5abd0c3f49accc8d3f0451303de5fc7278b274c2
 .closeIcon {
   color: white;
   height: 30px;
