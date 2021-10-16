@@ -1,8 +1,8 @@
-import { Navbar, Container, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Container, Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './SearchBar'
 
-const Header = ({logo, user, login, logout, setInput, search}) => {
+const Header = ({logo, user, login, logout, searchTerm, setSearchTerm, search}) => {
     return (
         <Navbar className="navbar" bg="dark" variant="dark">
             <Container className="container-fluid">
@@ -34,8 +34,9 @@ const Header = ({logo, user, login, logout, setInput, search}) => {
                                 <Button type="submit" variant="outline-light">Search</Button>
                             </Form>
                         </form> */}
-
-                        <SearchBar SearchBar = {SearchBar} />
+                        <form onSubmit={()=>{search(searchTerm)}}> 
+                            <SearchBar SearchBar = {SearchBar} term={searchTerm} setTerm={setSearchTerm} />
+                        </form>
                     </Nav>
                 </Navbar.Collapse>
 

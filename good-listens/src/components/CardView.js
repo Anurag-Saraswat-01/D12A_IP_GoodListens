@@ -21,7 +21,7 @@ const CardView = ({ rock, click, setClick, data }) => {
             <h2> {isNaN(click) ? '' : data[click].name} </h2>
             <h6> Artist - {isNaN(click) ? '' : data[click].artist} </h6>
             <h6> Album - {isNaN(click) ? '' : data[click].album} </h6>
-            <h6>2000</h6>
+            <h6> Release Date - {isNaN(click) ? '' : data[click].release_date} </h6>
           </div>
           <div className="ratings">
             <div className="rating-wrapper">

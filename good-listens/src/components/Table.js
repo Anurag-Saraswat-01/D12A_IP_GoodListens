@@ -5,24 +5,6 @@ import CardView from "./CardView";
 const Table = ({ rock, dataArr }) => {
 
   const [click, setClick] = useState(NaN);
-  const arr = [
-    {
-      name: "In The End",
-    },
-    {
-      name: "Life Goes on",
-    },
-    {
-      name: "Numb",
-    },
-    {
-      name: "Industry Baby",
-    },
-    {
-      name: "Animals",
-    },
-  ];
-
   const card = dataArr.map((data, key) => {
     // console.log((isNaN(click)))
     // console.log(data.id)
