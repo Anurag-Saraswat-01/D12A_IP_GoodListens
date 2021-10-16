@@ -5,11 +5,12 @@ import Table from "./components/Table";
 import rock from "./images/rock.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import firebase, { auth, provider, getAuth } from './components/Firebase';
+import { auth, provider, getAuth, database } from './components/Firebase';
 import { useState, useEffect } from 'react';
 
 function App() {
   const [songData, setSongData] = useState([]);
+  const [data, setData] = useState([]);
   const [user, setUser] = useState(null)
   const [searchTerm, setSearchTerm] = useState("");
   const refresh_token = "AQARwB4kcc2WGbbRcpuusCC0dccDVFqSwWh7ea6ewTY5-lYsJAcV8gB0u29DAJDk__QSKOqRfTL2Zo5A_AJ0NaS157pFBhvuD2qcN8jXNc9088_K5W4hUXVLVtXxHTStO8Q"
@@ -94,7 +95,7 @@ function App() {
       .then((result) => {
         if (result.user) {
           const user = result.user
-          setUser(user)  
+          setUser(user)
         }
       })
     console.log(user)
@@ -105,7 +106,36 @@ function App() {
       .then(() => {
         setUser(null)
       })
-    console.log(user)
+    console.log(user.uid)
+  }
+
+  const getData = () => {
+    const db = database.getDatabase()
+    const dbRef = database.ref(db)
+    database.onValue(database.child(dbRef, "songs/"), (snapshot) => {
+      if (snapshot.exists()) {
+        // console.log(snapshot.val())
+        const songs = snapshot.val()
+        // console.log(songs)
+        let arr = []
+        for (let song in songs) {
+          arr.push({
+            id: song,
+            name: songs[song].name,
+            album: songs[song].album,
+            artist: songs[song].artist,
+            image: songs[song].image,
+            url: songs[song].url
+          })
+          // arr.push(song)
+        }
+        // console.log(arr)
+        setData(arr)
+        // console.log(data)
+      } else {
+        alert("No data")
+      }
+    })
   }
 
   // so that user remains logged in after refresh
@@ -127,11 +157,10 @@ function App() {
   console.log(album);
   console.log(songData);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} search={search} />
-      <Table rock={rock} />
-      {/* <CardView  rock={rock} /> */}
-      <Footer/>
+      <Table rock={rock} dataArr={data} />
+      <Footer />
     </div>
   );
 }
