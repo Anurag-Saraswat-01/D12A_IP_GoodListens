@@ -56,7 +56,7 @@ function App() {
     console.log(data.tracks.items[0].album.images);
   }
 
-
+  console.log(searchTerm);
 // Refreshes the access token and searches the song on spotify api
   const refreshAccessToken = () => {
     let body = "grant_type=refresh_token";
@@ -112,7 +112,7 @@ function App() {
   const getData = () => {
     const db = database.getDatabase()
     const dbRef = database.ref(db)
-    database.onValue(database.child(dbRef, "songs/"), (snapshot) => {
+    database.onValue(database.child(dbRef, "spotify/"), (snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val())
         const songs = snapshot.val()
@@ -122,9 +122,11 @@ function App() {
           arr.push({
             id: song,
             name: songs[song].name,
+            album_type: songs[song].album_type,
             album: songs[song].album,
             artist: songs[song].artist,
             image: songs[song].image,
+            release_date: songs[song].release_date,
             url: songs[song].url
           })
           // arr.push(song)
