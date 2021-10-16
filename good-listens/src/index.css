@@ -152,12 +152,12 @@ code {
 .rating-wrapper {
   display: flex;
   flex-direction: row;
-  margin: auto 0;
+  margin: auto;
   gap: 5px;
 }
 
 .ratings p {
-  height: 24px;
+  height: 20px;
   margin: auto 0;
 }
 
