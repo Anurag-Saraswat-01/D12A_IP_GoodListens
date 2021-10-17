@@ -30,12 +30,12 @@ function App() {
     const search_url = `https://api.spotify.com/v1/search?q=${track}&type=${type}&market=${market}&limit=${limit}&offset=${offset}`
     console.log(search_url);
     const response = await fetch(search_url, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Authorization": "Bearer "+access_token
-        },
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + access_token
+      },
     });
     const data = await response.json();
     setSongData(data)
@@ -59,7 +59,7 @@ function App() {
   }
 
   console.log(searchTerm);
-// Refreshes the access token and searches the song on spotify api
+  // Refreshes the access token and searches the song on spotify api
   const refreshAccessToken = () => {
     let body = "grant_type=refresh_token";
     body += "&refresh_token=" + refresh_token;
@@ -72,24 +72,24 @@ function App() {
     xhr.send(body);
     xhr.onload = () => {
       console.log(this.status);
-      if ( this.status === 200 ){
-      var data = JSON.parse(this.responseText);
-      console.log(data);
-      if ( data.access_token !== undefined ){
-        console.log("access token: "+data.access_token)
-        var new_access_token = data.access_token;
-        return new_access_token
+      if (this.status === 200) {
+        var data = JSON.parse(this.responseText);
+        console.log(data);
+        if (data.access_token !== undefined) {
+          console.log("access token: " + data.access_token)
+          var new_access_token = data.access_token;
+          return new_access_token
+        }
+        // if ( data.refresh_token  !== undefined ){
+        //     // var new_refresh_token = data.refresh_token;
+        // }
       }
-      // if ( data.refresh_token  !== undefined ){
-      //     // var new_refresh_token = data.refresh_token;
-      // }
-    }
-    else {
+      else {
         console.log("Failed to fetch data");
         console.log(this.responseText);
+      }
     }
   }
-}
 
 
   const login = () => {
@@ -114,7 +114,7 @@ function App() {
   const getData = () => {
     const db = database.getDatabase()
     const dbRef = database.ref(db)
-    database.onValue(database.child(dbRef, "spotify/"), (snapshot) => {
+    database.get(database.child(dbRef, "spotify/")).then((snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val())
         const songs = snapshot.val()
@@ -131,7 +131,6 @@ function App() {
             release_date: songs[song].release_date,
             url: songs[song].url
           })
-          // arr.push(song)
         }
         // console.log(arr)
         setData(arr)
@@ -164,7 +163,6 @@ function App() {
     <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} search={search} />
       <Table rock={rock} dataArr={data} />
-      
       <AboutUs />
       <Footer />
     </div>

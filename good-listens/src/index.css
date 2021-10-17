@@ -108,6 +108,23 @@ code {
   background-color: var(--navbar-color) !important;
 }
 
+/* Page Buttons */
+.pageBtnContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 0 2.5%;
+  justify-content: space-between;
+}
+
+.pageBtn {
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  cursor: pointer;
+}
+
 /*Card VIew*/
 .view
 {

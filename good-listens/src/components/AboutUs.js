@@ -1,13 +1,12 @@
-import { Container } from "react-bootstrap"
+// import { Container } from "react-bootstrap"
 
 const AboutUs = () => {
     return (
         <section className="about">
             <div className="aboutUsContainer">
-                
                 <div className="innerContainer">
                     <h1>About Us</h1>
-                    <p class="text">
+                    <p className="text">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
                         eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
                         montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
@@ -23,7 +22,6 @@ const AboutUs = () => {
                 </div>
             </div>
         </section>
-
     )
 }
 
