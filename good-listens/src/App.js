@@ -38,29 +38,28 @@ function App() {
         },
     });
     const data = await response.json();
-    setSongData(data)
     console.log(data);
-    console.log(data.tracks.items[0]);
-    console.log("Song Name: ")
-    console.log(data.tracks.items[0].name);
-    console.log("Artist Name: ");
-    console.log(data.tracks.items[0].artists[0].name);
-    console.log("Album Type: ");
-    console.log(data.tracks.items[0].album.album_type);
-    console.log("Album Name: ");
-    album = data.tracks.items[0].album.name;
-    console.log(data.tracks.items[0].album.name);
-    console.log("Release Date: ");
-    console.log(data.tracks.items[0].album.release_date);
-    console.log("Spotify URL: ");
-    console.log(data.tracks.items[0].uri);
-    console.log("Image urls: ");
-    console.log(data.tracks.items[0].album.images);
+    // console.log(data);
+    // console.log(data.tracks.items[0]);
+    // console.log("Song Name: ")
+    // console.log(data.tracks.items[0].name);
+    // console.log("Artist Name: ");
+    // console.log(data.tracks.items[0].artists[0].name);
+    // console.log("Album Type: ");
+    // console.log(data.tracks.items[0].album.album_type);
+    // console.log("Album Name: ");
+    // album = data.tracks.items[0].album.name;
+    // console.log(data.tracks.items[0].album.name);
+    // console.log("Release Date: ");
+    // console.log(data.tracks.items[0].album.release_date);
+    // console.log("Spotify URL: ");
+    // console.log(data.tracks.items[0].uri);
+    // console.log("Image urls: ");
+    // console.log(data.tracks.items[0].album.images);
   }
 
-  console.log(searchTerm);
 // Refreshes the access token and searches the song on spotify api
-  const refreshAccessToken = () => {
+  function refreshAccessToken(track) {
     let body = "grant_type=refresh_token";
     body += "&refresh_token=" + refresh_token;
     body += "&client_id=" + client_id;
@@ -68,30 +67,29 @@ function App() {
     xhr.open("POST", TOKEN, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     // eslint-disable-next-line no-undef
-    xhr.setRequestHeader('Authorization', 'Basic ' + buf.toString(client_id + ":" + client_secret));
+    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
     xhr.send(body);
-    xhr.onload = () => {
-      console.log(this.status);
-      if ( this.status === 200 ){
-      var data = JSON.parse(this.responseText);
-      console.log(data);
-      if ( data.access_token !== undefined ){
-        console.log("access token: "+data.access_token)
-        var new_access_token = data.access_token;
-        return new_access_token
-      }
-      // if ( data.refresh_token  !== undefined ){
-      //     // var new_refresh_token = data.refresh_token;
-      // }
-    }
-    else {
-        console.log("Failed to fetch data");
-        console.log(this.responseText);
-    }
-  }
+    var song = track;
+    xhr.onload = () => {handleAuthorizationResponse(song)}
 }
 
-
+function handleAuthorizationResponse(track){
+      // if ( this.status === 200 ){
+    var data = JSON.stringify(this.response);
+    console.log(data);
+    console.log("access token: "+data.access_token)
+    var new_access_token = data.access_token;
+    getSearchData(track, new_access_token)
+          // if ( data.refresh_token  !== undefined ){
+          //     var new_refresh_token = data.refresh_token;
+          // }
+      // }
+      // else {
+      //     console.log("Failed to fetch data");
+      //     console.log(this.responseText);
+      // }
+  }
+  
   const login = () => {
     auth.signInWithPopup(getAuth, provider)
       .then((result) => {
@@ -154,12 +152,10 @@ function App() {
   // Will return the search result in the main page
   const search = () => {
     console.warn(searchTerm);
-    var token = refreshAccessToken();
-    getSearchData("In the End", token);
+    // refreshAccessToken(searchTerm)
   }
+  // refreshAccessToken("In The End")
 
-  console.log(album);
-  console.log(songData);
   return (
     <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} search={search} />

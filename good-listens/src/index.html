@@ -34,7 +34,7 @@
 
   //Spotify API
   var access_token = "BQBJeimBsPZAfo82oOeyj52Y6H3Apqekh4gPVHeyPWPZAwPwa5nl5b9N1TdZjraUDkdxJ0RIDht7pnN9aZt6SIZfnyJu8YFhlvfffjlJkuaWYOTbBmwp3vEHiQghiT2ZjcMpAdIwqrbbkgafPCbjbMELMQgQLTWxewK4Gs_LrKdLq7DWdQ"
-  var refresh_token = "AQARwB4kcc2WGbbRcpuusCC0dccDVFqSwWh7ea6ewTY5-lYsJAcV8gB0u29DAJDk__QSKOqRfTL2Zo5A_AJ0NaS157pFBhvuD2qcN8jXNc9088_K5W4hUXVLVtXxHTStO8Q"
+  var refresh_Token = "AQARwB4kcc2WGbbRcpuusCC0dccDVFqSwWh7ea6ewTY5-lYsJAcV8gB0u29DAJDk__QSKOqRfTL2Zo5A_AJ0NaS157pFBhvuD2qcN8jXNc9088_K5W4hUXVLVtXxHTStO8Q"
 
   const TOKEN = "https://accounts.spotify.com/api/token";
   const AUTHORIZE = "https://accounts.spotify.com/authorize"
@@ -82,21 +82,44 @@
     // console.log(data.tracks.items[0].id);
 }
 
-function refreshAccessToken(){
-    let body = "grant_type=refresh_token";
-    body += "&refresh_token=" + refresh_token;
-    body += "&client_id=" + client_id;
-    callAuthorizationApi(body);
+async function refreshAccessToken() {
+    const response = await fetch(TOKEN, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            "Authorization": "Basic "+ btoa(client_id + ":" + client_secret),
+        },
+        body: {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_Token,
+            "client_id": "e92ebaa8a3d1456fb1ab78acfe75fec7"
+        },
+    });
+    if ( this.status == 200 ){
+        const data = await response.json();
+        console.log(data);
+        console.log("access token: "+data.access_token)
+    }
+    else {
+        console.log("cant find data");
+    }
 }
 
-function callAuthorizationApi(body){
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", TOKEN, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
-    xhr.send(body);
-    xhr.onload = handleAuthorizationResponse;
-}
+// function refreshAccessToken(){
+//     let body = "grant_type=refresh_token";
+//     body += "&refresh_token=" + refresh_token;
+//     body += "&client_id=" + client_id;
+//     callAuthorizationApi(body);
+// }
+
+// function callAuthorizationApi(body){
+//     let xhr = new XMLHttpRequest();
+//     xhr.open("POST", TOKEN, true);
+//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+//     xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
+//     xhr.send(body);
+//     xhr.onload = handleAuthorizationResponse;
+// }
 
 async function loopData() {
   let i = 0;
