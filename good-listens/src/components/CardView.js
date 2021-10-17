@@ -36,7 +36,7 @@ const CardView = ({ rock, click, setClick, data }) => {
             </div>
           </div>
           <div className="play-icon-wrapper">
-            <a href={isNaN(click) ? '' : data[click].url} >
+            <a href={isNaN(click) ? '/' : data[click].url} >
               <FaHeadphones className="play-icon" />
             </a>
           </div>
