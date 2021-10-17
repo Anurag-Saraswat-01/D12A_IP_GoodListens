@@ -37,6 +37,19 @@ code {
   font-size: 32px !important;
 }
 
+.navbarDropdown {
+  background-color: var(--navbar-color);
+}
+
+.dropdown-menu {
+  padding: 0;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0;
+  text-align: center;
+  border: 0;
+}
+
 .nav {
   gap: 25px;
 }

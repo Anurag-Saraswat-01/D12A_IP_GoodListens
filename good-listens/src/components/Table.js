@@ -2,10 +2,12 @@ import { Card } from "react-bootstrap";
 import { useState } from "react";
 import CardView from "./CardView";
 
-const Table = ({ rock, dataArr }) => {
+const Table = ({ rock, dataArr, lang }) => {
 
+  // const x = dataArr.filter(data => data.language === lang )
   const [click, setClick] = useState(NaN);
-  const card = dataArr.map((data, key) => {
+  const filteredData = dataArr.filter(data => data.language === lang )
+  const card = filteredData.map((data, key) => {
     // console.log((isNaN(click)))
     // console.log(data.id)
     return (
@@ -27,7 +29,7 @@ const Table = ({ rock, dataArr }) => {
         <div className="row">{card}</div>
       </div>
       <div className="parent">
-        <CardView rock={rock} click={click} setClick={setClick} data={dataArr} />
+        <CardView rock={rock} click={click} setClick={setClick} data={filteredData} />
       </div>
     </div>
   );
