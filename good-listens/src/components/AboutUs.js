@@ -1,8 +1,9 @@
+// import { Container } from "react-bootstrap"
+
 const AboutUs = () => {
     return (
         <section className="about">
             <div className="aboutUsContainer">
-                
                 <div className="innerContainer">
                     <h1>About Us</h1>
                     <p className="text">
@@ -21,7 +22,6 @@ const AboutUs = () => {
                 </div>
             </div>
         </section>
-
     )
 }
 

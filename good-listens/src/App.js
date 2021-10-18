@@ -5,7 +5,7 @@ import Table from "./components/Table";
 import rock from "./images/rock.jpg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-// import {refreshAccessToken} from './components/SearchAPI'
+import {refreshAccessToken, getSearchData} from './components/SearchAPI'
 import { auth, provider, getAuth, database } from './components/Firebase';
 import { useState, useEffect } from 'react';
 import AboutUs from './components/AboutUs';
@@ -41,7 +41,7 @@ function App() {
   const getData = () => {
     const db = database.getDatabase()
     const dbRef = database.ref(db)
-    database.onValue(database.child(dbRef, "spotify/"), (snapshot) => {
+    database.get(database.child(dbRef, "spotify/")).then((snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val())
         const songs = snapshot.val()
@@ -59,11 +59,9 @@ function App() {
             release_date: songs[song].release_date,
             url: songs[song].url
           })
-          // arr.push(song)
         }
         // console.log(arr[0].language)
         setData(arr)
-        console.log(data)
       } else {
         alert("No data")
       }
@@ -78,17 +76,15 @@ function App() {
       }
     })
   })
-
   // Will return the search result in the main page
   const search = () => {
     console.warn(searchTerm);
-    // refreshAccessToken(searchTerm)
+    setSongData(refreshAccessToken(searchTerm))
   }
-
   return (
     <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} search={search} />
-      <Table rock={rock} dataArr={data} lang={language} />
+      <Table rock={rock} filteredData={data.filter(data => data.language === language )} lang={language} />
       
       <AboutUs />
       <Footer />
