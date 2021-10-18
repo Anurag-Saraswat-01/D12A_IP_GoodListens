@@ -84,7 +84,7 @@ function App() {
   return (
     <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} search={search} />
-      <Table rock={rock} filteredData={data.filter(data => data.language === language )} lang={language} />
+      <Table rock={rock} setlang={setLanguage} filteredData={data.filter(data => data.language === language )} lang={language} />
       
       <AboutUs />
       <Footer />

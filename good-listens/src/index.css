@@ -37,13 +37,24 @@ code {
   font-size: 32px !important;
 }
 
-.navbarDropdown {
+#dropdown-basic-button {
   background-color: var(--navbar-color);
+  border: 0;
+  font-size: 20px;
+  width: 150px !important;
 }
 
 .dropdown-menu {
   padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.languageDropdown {
+  padding: 0;
+  background-color: var(--table-color);
   font-weight: 500;
+  color: white;
   font-size: 18px;
   margin: 0;
   text-align: center;
