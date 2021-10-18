@@ -1,9 +1,9 @@
-import { Card } from "react-bootstrap";
+import { Card, Dropdown, DropdownButton } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import CardView from "./CardView";
 
-const Table = ({ rock, dataArr, lang, filteredData }) => {
+const Table = ({ rock, dataArr, lang, filteredData, setlang }) => {
 
   const [click, setClick] = useState(NaN);
   const [pageData, setPageData] = useState([])
@@ -55,8 +55,15 @@ const Table = ({ rock, dataArr, lang, filteredData }) => {
       <div className="tableContainer">
         <div className='pageBtnContainer'>
           <div className='pageBtn' onClick={prevPage} >< FaAngleLeft size={30} color={"orange"} /></div>
-          <h4>{pageNum}</h4>
-          <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
+            <DropdownButton id="dropdown-basic-button" align="end" title="Language">
+              <Dropdown.Item className="languageDropdown" onClick={()=>setlang("English")}>English</Dropdown.Item>
+              <Dropdown.Item className="languageDropdown" onClick={()=>setlang("Hindi")}>Hindi</Dropdown.Item>
+            </DropdownButton>
+            <DropdownButton id="dropdown-basic-button" align="end" title="Sort By">
+              <Dropdown.Item className="languageDropdown">User Rating</Dropdown.Item>
+              <Dropdown.Item className="languageDropdown">Well</Dropdown.Item>
+            </DropdownButton>
+        <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
         </div>
         <div className="row">{card}</div>
       </div>
