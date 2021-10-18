@@ -21,3 +21,5 @@
 /good-listens/npm-debug.log*
 /good-listens/yarn-debug.log*
 /good-listens/yarn-error.log*
+
+/good-listens/src/components/.prettierrc

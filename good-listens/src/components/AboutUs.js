@@ -7,11 +7,7 @@ const AboutUs = () => {
             <div className="aboutUsContainer">
                 <div className="innerContainer">
                     <h1>About Us</h1>
-<<<<<<< HEAD
-                    <p class="text">
-=======
                     <p className="text">
->>>>>>> 637e3d8d7624d08ceaf3a38c30ada9239940e646
                         Goodlistens provides the top rated songs for you. It provides you with the details
                         for Artists, Album name, rating given by other Listeners.
                     </p>
