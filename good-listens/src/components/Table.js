@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import CardView from "./CardView";
 
-const Table = ({ rock, dataArr, lang, filteredData, setlang }) => {
+const Table = ({ rock, dataArr, searchTerm, lang, filteredData, setlang, searchResults }) => {
 
   const [click, setClick] = useState(NaN);
   const [pageData, setPageData] = useState([])
   const [pageNum, setPageNum] = useState(1)
+  const [search, setSearch] = useState(false)
   //Filtering the data to be shown according to languages
   // const filteredData = dataArr.filter(data => data.language === lang )
 
@@ -30,9 +31,31 @@ const Table = ({ rock, dataArr, lang, filteredData, setlang }) => {
     }
   }
 
+  //if there is something in the searchbox will set the search hook to true 
+  useEffect(() => {
+    if (searchTerm === "" && searchTerm.length === 0) {
+      setSearch(false);
+    }
+    else if (searchTerm.length>0) {
+      setSearch(true)
+    }
+  }, [searchTerm])
+
+  //card and searchCard are same but they are mapping pagedata and searchresults 
   const card = pageData.map((data, key) => {
-    // console.log((isNaN(click)))
-    // console.log(data.id)
+    return (
+      <div className="col-md-3" key={key}>
+        <Card onClick={() => setClick(key)} >
+          <Card.Img variant="top" src={data.image} />
+          <Card.Body className="bg-dark">
+            <Card.Title className="center">{data.name}</Card.Title>
+          </Card.Body>
+        </Card>
+      </div>
+    );
+  });
+
+  const searchCard = searchResults.map((data, key) => {
     return (
       <div className="col-md-3" key={key}>
         <Card onClick={() => setClick(key)} >
@@ -47,9 +70,9 @@ const Table = ({ rock, dataArr, lang, filteredData, setlang }) => {
 
   // updating the pageData as per pageNum
   useEffect(() => {
-    setPageData(filteredData.slice((pageNum - 1) * 12, ((pageNum - 1) * 12) + 12 ))
+    setPageData(filteredData.slice((pageNum - 1) * 12, ((pageNum - 1) * 12) + 12 )) 
   }, [pageNum, filteredData])
-  // , filteredData
+
   return (
     <div className="container-fluid bodyContainer">
       <div className="tableContainer">
@@ -65,10 +88,10 @@ const Table = ({ rock, dataArr, lang, filteredData, setlang }) => {
             </DropdownButton>
         <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
         </div>
-        <div className="row">{card}</div>
+        <div className="row">{search ? searchCard : card}</div>
       </div>
       <div className="parent">
-        <CardView rock={rock} click={click} setClick={setClick} data={pageData} />
+        <CardView rock={rock} click={click} setClick={setClick} data={search ? searchResults : pageData} />
       </div>
     </div>
   );
