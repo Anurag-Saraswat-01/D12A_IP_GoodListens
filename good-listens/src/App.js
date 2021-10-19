@@ -11,10 +11,10 @@ import { auth, provider, getAuth, database } from './components/Firebase';
 import { useState, useEffect } from 'react';
 import AboutUs from './components/AboutUs';
 
+// Subsequent queries will use persistence, if it was enabled successfully
 
 function App() {
   const [songSearchData, setSongSearchData] = useState([]);
-  const [accesstoken, setAccesstoken] = useState("");
   const [data, setData] = useState([]);
   const [user, setUser] = useState(null)
   const [searchTerm, setSearchTerm] = useState("");
@@ -32,7 +32,6 @@ function App() {
       const headers = {
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded',
-              // 'Content-Type': 'application/x-www-form-urlencoded',
               'Authorization': 'Basic '+btoa(client_id +":"+ client_secret)
           }
       };
@@ -44,7 +43,6 @@ function App() {
       axios.post(TOKEN, querystring.stringify(data), headers)
       .then(response=>{
           console.log(response.data);
-          setAccesstoken(response.data.access_token)
           getSearchData(response.data.access_token)
       })
       .catch(error=> console.log(error))
@@ -54,7 +52,7 @@ function App() {
       var track = searchTerm.replace(/ /g, "%20");
       const type = "track" //artist, album 
       const market = "US";
-      const limit = "1";
+      const limit = "12";
       const offset = "0"
       const search_url = `https://api.spotify.com/v1/search?q=${track}&type=${type}&market=${market}&limit=${limit}&offset=${offset}`
   
@@ -67,7 +65,27 @@ function App() {
       }
       const response = await axios.get(search_url, headers)
       if (response.data) {
-        setSongSearchData(response.data)
+        let limit = response.data.tracks.limit;
+        let arr = []
+        for (let i = 0; i<limit; i++) {
+        arr.push({
+          id: response.data.tracks.items[i].id,
+          name: response.data.tracks.items[i].name,
+          album_type: response.data.tracks.items[i].album.type,
+          album: response.data.tracks.items[i].album.name,
+          artist: response.data.tracks.items[i].artists[0].name,
+          image: response.data.tracks.items[i].album.images[1].url,
+          language: "English",
+          release_date: response.data.tracks.items[i].album.release_date,
+          url: response.data.tracks.items[i].uri
+        })
+        }
+        setSongSearchData(arr)
+        if (searchTerm.length === 0) {
+          setSongSearchData([])
+        }
+        console.log(arr);
+        console.log(response.data);
       }
       // .then(response=>{
       //   console.log(response.data);
@@ -75,6 +93,8 @@ function App() {
       // })
       // .catch(error=>console.log(error))
   }
+
+  //Will refresh the accesstoken and search data if there is something in the searchbox
   useEffect(() => {
     if (searchTerm.length > 0) {
       refreshAccessToken()
@@ -106,6 +126,7 @@ function App() {
   const getData = () => {
     const db = database.getDatabase()
     const dbRef = database.ref(db)
+    // enableIndexedDbPersistence(db)
     database.get(database.child(dbRef, "spotify/")).then((snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val())
@@ -125,7 +146,6 @@ function App() {
             url: songs[song].url
           })
         }
-        // console.log(arr[0].language)
         setData(arr)
       } else {
         alert("No data")
@@ -141,19 +161,11 @@ function App() {
       }
     })
   })
-  // Will return the search result in the main page
-  const search = () => {
-    console.warn(searchTerm);
-    refreshAccessToken();
-    // useEffect(() => {
-    //   refreshAccessToken(searchTerm);
-    // }, [])
-  }
-  
+
   return (
     <div className="container-fluid" onLoad={getData}>
-      <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} search={search} />
-      <Table rock={rock} setlang={setLanguage} filteredData={data.filter(data => data.language === language )} lang={language} />
+      <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Table rock={rock} setlang={setLanguage} filteredData={data.filter(data => data.language === language )} searchResults={songSearchData} lang={language} searchTerm={searchTerm} />
       <AboutUs />
       <Footer />
     </div>
@@ -164,3 +176,4 @@ export default App;
 
 // code=AQDFAZ2sG65Kn7lix2_FNmoTZlf1t1quPf7Q0M6nsrSOQaOweQ4UWCX5odUoA5xyYkOceCJuJV6J2jvKi5Wzdc4raIUytAa35-hRZYVXFE4d_hnupd6NUSHMJSjWa8Uvx8plLyWkGrsfQJOarVSknPSly8thJHRtsj-pbwIfJLfa4Zr5n8D3Q6wZ7IZejDjJ2qKM3JAdlMLHd6toFg
 // state=RMDhxal9unJMbRjh
+
