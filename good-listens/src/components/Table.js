@@ -84,8 +84,9 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
             <Dropdown.Item className="languageDropdown" onClick={() => setlang("Hindi")}>Hindi</Dropdown.Item>
           </DropdownButton>
           <DropdownButton id="dropdown-basic-button" align="end" title="Sort By">
-            <Dropdown.Item className="languageDropdown">User Rating</Dropdown.Item>
-            <Dropdown.Item className="languageDropdown">Well</Dropdown.Item>
+            {user ? <Dropdown.Item className="languageDropdown">User Rating</Dropdown.Item> : null}
+            <Dropdown.Item className="languageDropdown">Total Rating</Dropdown.Item>
+            <Dropdown.Item className="languageDropdown">Artist</Dropdown.Item>
           </DropdownButton>
           <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
         </div>
