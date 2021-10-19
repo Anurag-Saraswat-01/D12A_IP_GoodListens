@@ -1,19 +1,19 @@
 import axios from 'axios'
 import querystring from 'query-string'
 
-
-var refresh_token = "AQARwB4kcc2WGbbRcpuusCC0dccDVFqSwWh7ea6ewTY5-lYsJAcV8gB0u29DAJDk__QSKOqRfTL2Zo5A_AJ0NaS157pFBhvuD2qcN8jXNc9088_K5W4hUXVLVtXxHTStO8Q"
+const SearchAPI = () => {
+const refresh_token = "AQARwB4kcc2WGbbRcpuusCC0dccDVFqSwWh7ea6ewTY5-lYsJAcV8gB0u29DAJDk__QSKOqRfTL2Zo5A_AJ0NaS157pFBhvuD2qcN8jXNc9088_K5W4hUXVLVtXxHTStO8Q"
 
 const TOKEN = "https://accounts.spotify.com/api/token";
 
-var client_id = "e92ebaa8a3d1456fb1ab78acfe75fec7"
-var client_secret = "f2cdafb887294ee1a158d5905cc89f4d"
+const client_id = "e92ebaa8a3d1456fb1ab78acfe75fec7"
+const client_secret = "f2cdafb887294ee1a158d5905cc89f4d"
 
 console.log("This is to be copied: "+btoa(client_id + ":" + client_secret))
 
 //Refreshing access token
 
-export const refreshAccessToken = (track) => {
+const refreshAccessToken = (track) => {
     const headers = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -33,7 +33,7 @@ export const refreshAccessToken = (track) => {
     .catch(error=> console.log(error))
 }
 
-export const getSearchData = (track, access_token) => {
+const getSearchData = (track, access_token) => {
     track = track.replace(/ /g, "%20");
     const type = "track" //artist, album 
     const market = "US";
@@ -51,8 +51,18 @@ export const getSearchData = (track, access_token) => {
     axios.get(search_url, headers)
     .then(response=>response)
     .catch(error=>console.log(error))
-
 }
+
+
+    return (
+        <div>
+            
+        </div>
+    )
+}
+
+export default SearchAPI
+
 
 
 

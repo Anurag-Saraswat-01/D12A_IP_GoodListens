@@ -27,7 +27,8 @@ const Header = ({ logo, user, login, logout, setlang, searchTerm, setSearchTerm,
                             <NavDropdown.Item className="navbarDropdown" onClick={()=>setlang("English")}>English</NavDropdown.Item>
                             <NavDropdown.Item className="navbarDropdown" onClick={()=>setlang("Hindi")}>Hindi</NavDropdown.Item>
                         </NavDropdown>
-                        <form onSubmit={() => { search(searchTerm) }}>
+                        <form >
+                        {/* //onSubmit={() => { search(searchTerm) }} */}
                             <SearchBar SearchBar={SearchBar} term={searchTerm} setTerm={setSearchTerm} />
                         </form>
                     </Nav>
