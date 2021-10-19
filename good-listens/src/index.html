@@ -53,12 +53,12 @@
     const search_url = `https://api.spotify.com/v1/search?q=${track}&type=${type}&market=${market}&limit=${limit}&offset=${offset}`
     console.log(search_url);
     const response = await fetch(search_url, {
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer "+access_token
-        },
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + access_token
+      },
     });
     const songData = await response.json();
     insertData(songData.tracks);
@@ -80,83 +80,83 @@
     // console.log(data.tracks.items[0].album.images);
     // console.log("Id")
     // console.log(data.tracks.items[0].id);
-}
-
-async function refreshAccessToken() {
-    const response = await fetch(TOKEN, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            "Authorization": "Basic "+ btoa(client_id + ":" + client_secret),
-        },
-        body: {
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_Token,
-            "client_id": "e92ebaa8a3d1456fb1ab78acfe75fec7"
-        },
-    });
-    if ( this.status == 200 ){
-        const data = await response.json();
-        console.log(data);
-        console.log("access token: "+data.access_token)
-    }
-    else {
-        console.log("cant find data");
-    }
-}
-
-// function refreshAccessToken(){
-//     let body = "grant_type=refresh_token";
-//     body += "&refresh_token=" + refresh_token;
-//     body += "&client_id=" + client_id;
-//     callAuthorizationApi(body);
-// }
-
-// function callAuthorizationApi(body){
-//     let xhr = new XMLHttpRequest();
-//     xhr.open("POST", TOKEN, true);
-//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-//     xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
-//     xhr.send(body);
-//     xhr.onload = handleAuthorizationResponse;
-// }
-
-async function loopData() {
-  let i = 0;
-  while (i < tracks.length) {
-    getSearchData(tracks[i], artists[i]);
-    i++;
   }
-}
 
-
-function handleAuthorizationResponse(){
-    if ( this.status == 200 ){
-        var data = JSON.parse(this.responseText);
-        console.log(data);
-        if ( data.access_token != undefined ){
-            console.log("access token: "+data.access_token)
-            var new_access_token = data.access_token;
-            const tracks = ["Agar Tum Saath Ho", "Banjaara", "Chaar Kadam", "Hasi", "Janam Janam", "Kanaa", "Loveyatri", "Main Dhoondne Ko Zamaane Mein", "Namo Namo", "Sweetheart", "Raabta", "Pyaar...Ek Tarfaa", "Teri Mitti", "Yeh Fitoor Mera", "Zaalima", "Quaafirana", "Thinking Out Loud", "Tera Hua", "Rang Tari", "Kabira", "Kun Faye Kun", "Maahi Ve", "Hale Dil", "Hamari Adhuri Kahani", "Galliyan", "Ghungroo"];
-            let i = 0;
-            while (i < tracks.length) {
-              getSearchData(tracks[i], new_access_token);
-              i++;
-            }            
-        }
-        if ( data.refresh_token  != undefined ){
-            var new_refresh_token = data.refresh_token;
-        }
+  async function refreshAccessToken() {
+    const response = await fetch(TOKEN, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Authorization": "Basic " + btoa(client_id + ":" + client_secret),
+      },
+      body: {
+        "grant_type": "refresh_token",
+        "refresh_token": refresh_Token,
+        "client_id": "e92ebaa8a3d1456fb1ab78acfe75fec7"
+      },
+    });
+    if (this.status == 200) {
+      const data = await response.json();
+      console.log(data);
+      console.log("access token: " + data.access_token)
     }
     else {
-        console.log("Failed to fetch data");
-        console.log(this.responseText);
+      console.log("cant find data");
     }
-}
+  }
 
-// requestAuthorization();
-// fetchAccessToken(code);
-refreshAccessToken();
+  // function refreshAccessToken(){
+  //     let body = "grant_type=refresh_token";
+  //     body += "&refresh_token=" + refresh_token;
+  //     body += "&client_id=" + client_id;
+  //     callAuthorizationApi(body);
+  // }
+
+  // function callAuthorizationApi(body){
+  //     let xhr = new XMLHttpRequest();
+  //     xhr.open("POST", TOKEN, true);
+  //     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  //     xhr.setRequestHeader('Authorization', 'Basic ' + btoa(client_id + ":" + client_secret));
+  //     xhr.send(body);
+  //     xhr.onload = handleAuthorizationResponse;
+  // }
+
+  async function loopData() {
+    let i = 0;
+    while (i < tracks.length) {
+      getSearchData(tracks[i], artists[i]);
+      i++;
+    }
+  }
+
+
+  function handleAuthorizationResponse() {
+    if (this.status == 200) {
+      var data = JSON.parse(this.responseText);
+      console.log(data);
+      if (data.access_token != undefined) {
+        console.log("access token: " + data.access_token)
+        var new_access_token = data.access_token;
+        const tracks = ["Agar Tum Saath Ho", "Banjaara", "Chaar Kadam", "Hasi", "Janam Janam", "Kanaa", "Loveyatri", "Main Dhoondne Ko Zamaane Mein", "Namo Namo", "Sweetheart", "Raabta", "Pyaar...Ek Tarfaa", "Teri Mitti", "Yeh Fitoor Mera", "Zaalima", "Quaafirana", "Thinking Out Loud", "Tera Hua", "Rang Tari", "Kabira", "Kun Faye Kun", "Maahi Ve", "Hale Dil", "Hamari Adhuri Kahani", "Galliyan", "Ghungroo"];
+        let i = 0;
+        while (i < tracks.length) {
+          getSearchData(tracks[i], new_access_token);
+          i++;
+        }
+      }
+      if (data.refresh_token != undefined) {
+        var new_refresh_token = data.refresh_token;
+      }
+    }
+    else {
+      console.log("Failed to fetch data");
+      console.log(this.responseText);
+    }
+  }
+
+  // requestAuthorization();
+  // fetchAccessToken(code);
+  refreshAccessToken();
 
 
 
@@ -191,7 +191,7 @@ refreshAccessToken();
   async function selectData() {
     const songid = "a055cd69-ad9c-4563-a49a-7696f097bc4f"
     const dbRef = ref(db);
-    get(child(dbRef, "songs/" + songid )).then((snapshot) => {
+    get(child(dbRef, "songs/" + songid)).then((snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val());
         const data = snapshot.val()

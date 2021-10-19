@@ -2,8 +2,9 @@ import { Card, Dropdown, DropdownButton } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import CardView from "./CardView";
+import { update } from "@firebase/database";
 
-const Table = ({ rock, dataArr, searchTerm, lang, filteredData, setlang, searchResults }) => {
+const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults, updateRating, user }) => {
 
   const [click, setClick] = useState(NaN);
   const [pageData, setPageData] = useState([])
@@ -36,7 +37,7 @@ const Table = ({ rock, dataArr, searchTerm, lang, filteredData, setlang, searchR
     if (searchTerm === "" && searchTerm.length === 0) {
       setSearch(false);
     }
-    else if (searchTerm.length>0) {
+    else if (searchTerm.length > 0) {
       setSearch(true)
     }
   }, [searchTerm])
@@ -70,7 +71,7 @@ const Table = ({ rock, dataArr, searchTerm, lang, filteredData, setlang, searchR
 
   // updating the pageData as per pageNum
   useEffect(() => {
-    setPageData(filteredData.slice((pageNum - 1) * 12, ((pageNum - 1) * 12) + 12 )) 
+    setPageData(filteredData.slice((pageNum - 1) * 12, ((pageNum - 1) * 12) + 12))
   }, [pageNum, filteredData])
 
   return (
@@ -78,20 +79,21 @@ const Table = ({ rock, dataArr, searchTerm, lang, filteredData, setlang, searchR
       <div className="tableContainer">
         <div className='pageBtnContainer'>
           <div className='pageBtn' onClick={prevPage} >< FaAngleLeft size={30} color={"orange"} /></div>
-            <DropdownButton id="dropdown-basic-button" align="end" title="Language">
-              <Dropdown.Item className="languageDropdown" onClick={()=>setlang("English")}>English</Dropdown.Item>
-              <Dropdown.Item className="languageDropdown" onClick={()=>setlang("Hindi")}>Hindi</Dropdown.Item>
-            </DropdownButton>
-            <DropdownButton id="dropdown-basic-button" align="end" title="Sort By">
-              <Dropdown.Item className="languageDropdown">User Rating</Dropdown.Item>
-              <Dropdown.Item className="languageDropdown">Well</Dropdown.Item>
-            </DropdownButton>
-        <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
+          <DropdownButton id="dropdown-basic-button" align="end" title="Language">
+            <Dropdown.Item className="languageDropdown" onClick={() => setlang("English")}>English</Dropdown.Item>
+            <Dropdown.Item className="languageDropdown" onClick={() => setlang("Hindi")}>Hindi</Dropdown.Item>
+          </DropdownButton>
+          <DropdownButton id="dropdown-basic-button" align="end" title="Sort By">
+            <Dropdown.Item className="languageDropdown">User Rating</Dropdown.Item>
+            <Dropdown.Item className="languageDropdown">Well</Dropdown.Item>
+          </DropdownButton>
+          <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
         </div>
         <div className="row">{search ? searchCard : card}</div>
       </div>
       <div className="parent">
-        <CardView rock={rock} click={click} setClick={setClick} data={search ? searchResults : pageData} />
+        <CardView click={click} setClick={setClick} data={search ? searchResults[click] : pageData[click]}
+          dataArr={dataArr} updateRating={updateRating} user={user} />
       </div>
     </div>
   );
