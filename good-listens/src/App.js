@@ -21,6 +21,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [searchTerm, setSearchTerm] = useState("");
   const [language, setLanguage] = useState("English");
+  const [sortBy, setSortBy] = useState('name')
   const refresh_token = "AQARwB4kcc2WGbbRcpuusCC0dccDVFqSwWh7ea6ewTY5-lYsJAcV8gB0u29DAJDk__QSKOqRfTL2Zo5A_AJ0NaS157pFBhvuD2qcN8jXNc9088_K5W4hUXVLVtXxHTStO8Q"
 
   const TOKEN = "https://accounts.spotify.com/api/token";
@@ -112,7 +113,7 @@ function App() {
 
   //Inserting data into Firebase on clicking the searchResults
 
-  const insertData = async(track) => {
+  const insertData = async (track) => {
     const db = database.getDatabase()
     set(ref(db, "spotify/" + track.id), {
       album: track.album_name,
@@ -176,7 +177,42 @@ function App() {
             user_rating: ('user_rating' in songs[song] ? songs[song].user_rating : null)
           })
         }
-        setData(arr)
+
+        switch (sortBy) {
+          case 'name':
+            setData(arr.sort((a, b) => `${a.name}`.localeCompare(`${b.name}`)))
+            break;
+
+          case 'artist':
+            setData(arr.sort((a, b) => `${a.artist}`.localeCompare(`${b.artist}`)))
+            break;
+
+          case 'user':
+            arr = arr.filter(data => data.user_rating && user.uid in data.user_rating)
+            setData(arr.sort((a, b) => b.user_rating[user.uid] - a.user_rating[user.uid]))
+            break;
+
+          case 'average':
+            const calcRating = (data) => {
+              let avg
+              if (data.user_rating) {
+                let totalUsers = Object.keys(data.user_rating).length
+                let sum = 0
+                for (let rating in data.user_rating) {
+                  sum += data.user_rating[rating]
+                }
+                avg = sum / totalUsers
+              } else {
+                avg = 0
+              }
+              return avg
+            }
+            setData(arr.sort((a, b) => calcRating(b) - calcRating(a)))
+            break;
+
+          default:
+            break;
+        }
       } else {
         alert("No data")
       }
@@ -203,11 +239,15 @@ function App() {
     })
   })
 
+  useEffect(() => {
+    getData()
+  }, [sortBy])
+
   return (
     <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)}
-        searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert = {insertData} />
+      <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)} setSortBy={setSortBy}
+        searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
       <AboutUs />
       <Footer />
     </div>

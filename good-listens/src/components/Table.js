@@ -6,7 +6,7 @@ import { ref, set } from "firebase/database";
 import { auth, provider, getAuth, database } from './Firebase';
 
 
-const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults, updateRating, user }) => {
+const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, searchResults, updateRating, user }) => {
 
   var dataID = []
   for (let i = 0; i<dataArr.length; i++) {
@@ -125,9 +125,10 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
             <Dropdown.Item className="languageDropdown" onClick={() => setlang("Hindi")}>Hindi</Dropdown.Item>
           </DropdownButton>
           <DropdownButton id="dropdown-basic-button" align="end" title="Sort By">
-            {user ? <Dropdown.Item className="languageDropdown">User Rating</Dropdown.Item> : null}
-            <Dropdown.Item className="languageDropdown">Total Rating</Dropdown.Item>
-            <Dropdown.Item className="languageDropdown">Artist</Dropdown.Item>
+            <Dropdown.Item className="languageDropdown" onClick={() => setSortBy("name")} >Name</Dropdown.Item>
+            <Dropdown.Item className="languageDropdown" onClick={() => setSortBy("artist")} >Artist</Dropdown.Item>
+            {user ? <Dropdown.Item className="languageDropdown" onClick={() => setSortBy("user")} >User Rating</Dropdown.Item> : null}
+            <Dropdown.Item className="languageDropdown" onClick={() => setSortBy("average")} >Average Rating</Dropdown.Item>
           </DropdownButton>
           <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
         </div>
