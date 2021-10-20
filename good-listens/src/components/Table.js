@@ -89,7 +89,7 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
         <Card onClick={() => {setClick(key)} } >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark">
-            <Card.Title className="center">{data.name}</Card.Title>
+            <Card.Title className="center card-tile">{data.name}</Card.Title>
           </Card.Body>
         </Card>
       </div>
@@ -103,7 +103,7 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
         <Card onClick={() => handleClick(data, key)} >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark">
-            <Card.Title className="center">{data.name}</Card.Title>
+            <Card.Title className="center card-title">{data.name}</Card.Title>
           </Card.Body>
         </Card>
       </div>
@@ -119,7 +119,7 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
     <div className="container-fluid bodyContainer">
       <div className="tableContainer">
         <div className='pageBtnContainer'>
-          <div className='pageBtn' onClick={prevPage} >< FaAngleLeft size={30} color={"orange"} /></div>
+          <div className='pageBtn' onClick={prevPage} >< FaAngleLeft size={30} color={"orange"} className="pageBtnIcon" /></div>
           <DropdownButton id="dropdown-basic-button" align="end" title="Language">
             <Dropdown.Item className="languageDropdown" onClick={() => setlang("English")}>English</Dropdown.Item>
             <Dropdown.Item className="languageDropdown" onClick={() => setlang("Hindi")}>Hindi</Dropdown.Item>
@@ -130,7 +130,7 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
             {user ? <Dropdown.Item className="languageDropdown" onClick={() => setSortBy("user")} >Your Rating</Dropdown.Item> : null}
             <Dropdown.Item className="languageDropdown" onClick={() => setSortBy("average")} >Top Rating</Dropdown.Item>
           </DropdownButton>
-          <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
+          <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} className="pageBtnIcon" /></div>
         </div>
         <div className="row" >{search ? searchCard : card}</div>
       </div>
