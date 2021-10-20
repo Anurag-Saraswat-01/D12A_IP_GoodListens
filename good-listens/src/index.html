@@ -191,7 +191,7 @@
   async function selectData() {
     const songid = "a055cd69-ad9c-4563-a49a-7696f097bc4f"
     const dbRef = ref(db);
-    get(child(dbRef, "songs/" + songid)).then((snapshot) => {
+    get(child(dbRef, "spotify/" + songid)).then((snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val());
         const data = snapshot.val()
@@ -232,7 +232,7 @@
 
   // selectData();
 
-  // var submitBtn = document.getElementById("submit");
+  var submitBtn = document.getElementById("submit");
   // const root_url = "http://ws.audioscrobbler.com/2.0";
   // const api_key = "4a16f1c32796c466a1347458ab1626f4";
 
@@ -265,10 +265,10 @@
 
   submitBtn.addEventListener("click", function () {
     // getData('Papercut', 'Linkin Park')
-    // selectData();
+    selectData();
     // updateData();
     // selectData();
-    updateRating();
+    // updateRating();
   });
 </script>
 

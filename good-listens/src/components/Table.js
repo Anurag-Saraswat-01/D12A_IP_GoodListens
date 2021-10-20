@@ -69,6 +69,11 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
     setClick(key)
     if (dataID.includes(data.id)) {
       console.log("Data is already in Database");
+      for (let i = 0; i < dataArr.length; i++) {
+        if (dataArr[i].id === data.id) {
+          data.user_rating = dataArr[i].user_rating
+        }
+      }
     }
     else {
       console.log("Data not in database");

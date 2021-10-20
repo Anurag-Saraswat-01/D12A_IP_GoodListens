@@ -80,7 +80,8 @@ function App() {
             image: response.data.tracks.items[i].album.images[1].url,
             language: "English",
             release_date: response.data.tracks.items[i].album.release_date,
-            url: response.data.tracks.items[i].uri
+            url: response.data.tracks.items[i].uri,
+            user_rating: null
           })
           setSongSearchData(arr)
           if (searchTerm.length === 0) {

@@ -6,11 +6,31 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
   const [totalUsers, setTotalUsers] = useState(0)
   const [averageRating, setAverageRating] = useState(0)
 
+  const uid = user ? user.uid : null
+
   const ratingChanged = (newrating) => {
     updateRating(data.id, newrating)
+    console.log(data)
+    if (data.user_rating) {
+      data.user_rating[uid] = newrating
+    } else {
+      data.user_rating = {
+        [uid]: newrating
+      }
+    }
+    if (!isNaN(click) && data.user_rating) {
+      setTotalUsers(Object.keys(data.user_rating).length)
+      let sum = 0
+      for (let rating in data.user_rating) {
+        sum += data.user_rating[rating]
+      }
+      setAverageRating(sum / totalUsers)
+    } else {
+      setTotalUsers(0)
+      setAverageRating(0)
+    }
   }
 
-  const uid = user ? user.uid : null
   // sets rating after checking if something is clicked and user_rating exists in the db and uid exist in user_rating
   const rating = !isNaN(click) && data.user_rating && (uid in data.user_rating) ? data.user_rating[uid] : 0
   // returns a react-rating-stars-component if something is clicked, value depending on rating making it dynamic
