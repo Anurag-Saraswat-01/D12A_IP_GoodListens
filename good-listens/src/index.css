@@ -306,7 +306,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   background-color: var(--table-color);
-  padding: 0;
+  padding: 3.5%;
   margin: 0;
   text-align: center;
 }

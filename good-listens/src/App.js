@@ -11,6 +11,7 @@ import { auth, provider, getAuth, database } from './components/Firebase';
 import { ref, set } from "firebase/database";
 import { useState, useEffect } from 'react';
 import AboutUs from './components/AboutUs';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 // Subsequent queries will use persistence, if it was enabled successfully
@@ -244,13 +245,18 @@ function App() {
   }, [sortBy])
 
   return (
-    <div className="container-fluid" onLoad={getData}>
-      <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)} setSortBy={setSortBy}
-        searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
-      <AboutUs />
-      <Footer />
-    </div>
+    <Router>
+      <div className="container-fluid" onLoad={getData}>
+        <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <Route path="/" exact render={() => (
+          <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)} setSortBy={setSortBy}
+            searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
+        )} />
+        <Route path="/about" component={AboutUs} />
+        {/* <AboutUs /> */}
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
