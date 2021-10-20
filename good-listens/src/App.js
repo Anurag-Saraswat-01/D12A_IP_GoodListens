@@ -8,8 +8,10 @@ import axios from 'axios'
 import querystring from 'query-string'
 import './index.css';
 import { auth, provider, getAuth, database } from './components/Firebase';
+import { ref, set } from "firebase/database";
 import { useState, useEffect } from 'react';
 import AboutUs from './components/AboutUs';
+
 
 // Subsequent queries will use persistence, if it was enabled successfully
 
@@ -42,7 +44,7 @@ function App() {
     };
     axios.post(TOKEN, querystring.stringify(data), headers)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         getSearchData(response.data.access_token)
       })
       .catch(error => console.log(error))
@@ -68,24 +70,29 @@ function App() {
       let limit = response.data.tracks.limit;
       let arr = []
       for (let i = 0; i < limit; i++) {
-        arr.push({
-          id: response.data.tracks.items[i].id,
-          name: response.data.tracks.items[i].name,
-          album_type: response.data.tracks.items[i].album.type,
-          album: response.data.tracks.items[i].album.name,
-          artist: response.data.tracks.items[i].artists[0].name,
-          image: response.data.tracks.items[i].album.images[1].url,
-          language: "English",
-          release_date: response.data.tracks.items[i].album.release_date,
-          url: response.data.tracks.items[i].uri
-        })
+        try {
+          arr.push({
+            id: response.data.tracks.items[i].id,
+            name: response.data.tracks.items[i].name,
+            album_type: response.data.tracks.items[i].album.type,
+            album: response.data.tracks.items[i].album.name,
+            artist: response.data.tracks.items[i].artists[0].name,
+            image: response.data.tracks.items[i].album.images[1].url,
+            language: "English",
+            release_date: response.data.tracks.items[i].album.release_date,
+            url: response.data.tracks.items[i].uri
+          })
+          setSongSearchData(arr)
+          if (searchTerm.length === 0) {
+            setSongSearchData([])
+          }
+          // console.log(arr);
+          // console.log(response.data);
+
+        } catch (error) {
+          console.log(error);
+        }
       }
-      setSongSearchData(arr)
-      if (searchTerm.length === 0) {
-        setSongSearchData([])
-      }
-      console.log(arr);
-      console.log(response.data);
     }
     // .then(response=>{
     //   console.log(response.data);
@@ -100,6 +107,27 @@ function App() {
       refreshAccessToken()
     }
   }, [searchTerm])
+
+
+  //Inserting data into Firebase on clicking the searchResults
+
+  const insertData = async(track) => {
+    const db = database.getDatabase()
+    set(ref(db, "spotify/" + track.id), {
+      album: track.album_name,
+      image: track.image,
+      artist: track.artist,
+      release_date: track.release_date,
+      album_type: track.album_type,
+      name: track.name,
+      language: "English",
+      url: track.url,
+      user_rating: {},
+      // user_rating: ('user_rating' in songs[song] ? songs[song].user_rating : null)
+
+    });
+    console.log("Data added successfully");
+  }
 
   // Login with Google Accounts
   const login = () => {
@@ -178,7 +206,7 @@ function App() {
     <div className="container-fluid" onLoad={getData}>
       <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)}
-        searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} />
+        searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert = {insertData} />
       <AboutUs />
       <Footer />
     </div>

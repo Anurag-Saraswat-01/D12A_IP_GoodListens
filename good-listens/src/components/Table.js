@@ -2,10 +2,16 @@ import { Card, Dropdown, DropdownButton } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import CardView from "./CardView";
-import { update } from "@firebase/database";
+import { ref, set } from "firebase/database";
+import { auth, provider, getAuth, database } from './Firebase';
+
 
 const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults, updateRating, user }) => {
 
+  var dataID = []
+  for (let i = 0; i<dataArr.length; i++) {
+    dataID.push(dataArr[i].id);
+  }
   const [click, setClick] = useState(NaN);
   const [pageData, setPageData] = useState([])
   const [pageNum, setPageNum] = useState(1)
@@ -32,6 +38,24 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
     }
   }
 
+  const insertData = async(track) => {
+    const db = database.getDatabase()
+    set(ref(db, "spotify/" + track.id), {
+      album: track.album,
+      image: track.image,
+      artist: track.artist,
+      release_date: track.release_date,
+      album_type: track.album_type,
+      name: track.name,
+      language: "undefined",
+      url: track.url,
+      user_rating: {}
+      // user_rating: ('user_rating' in songs[song] ? songs[song].user_rating : null)
+    });
+    console.log("Data added successfully");
+  }
+
+
   //if there is something in the searchbox will set the search hook to true 
   useEffect(() => {
     if (searchTerm === "" && searchTerm.length === 0) {
@@ -41,12 +65,23 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
       setSearch(true)
     }
   }, [searchTerm])
-
+  const handleClick = (data,key) => {
+    setClick(key)
+    if (dataID.includes(data.id)) {
+      console.log("Data is already in Database");
+    }
+    else {
+      console.log("Data not in database");
+      insertData(data)
+    }
+  }
+  // console.log(click);
   //card and searchCard are same but they are mapping pagedata and searchresults 
   const card = pageData.map((data, key) => {
     return (
       <div className="col-md-3" key={key}>
-        <Card onClick={() => setClick(key)} >
+        {/* handleClick(key, data) */}
+        <Card onClick={() => {setClick(key)} } >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark">
             <Card.Title className="center">{data.name}</Card.Title>
@@ -57,9 +92,10 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
   });
 
   const searchCard = searchResults.map((data, key) => {
+    // console.log(searchResults);
     return (
       <div className="col-md-3" key={key}>
-        <Card onClick={() => setClick(key)} >
+        <Card onClick={() => handleClick(data, key)} >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark">
             <Card.Title className="center">{data.name}</Card.Title>
@@ -90,7 +126,7 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setlang, searchResults
           </DropdownButton>
           <div className='pageBtn' onClick={nextPage} >< FaAngleRight size={30} color={"orange"} /></div>
         </div>
-        <div className="row">{search ? searchCard : card}</div>
+        <div className="row" >{search ? searchCard : card}</div>
       </div>
       <div className="parent">
         <CardView click={click} setClick={setClick} data={search ? searchResults[click] : pageData[click]}
