@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import CardView from "./CardView";
 import { ref, set } from "firebase/database";
-import { auth, provider, getAuth, database } from './Firebase';
 
 
 const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, searchResults, updateRating, user }) => {

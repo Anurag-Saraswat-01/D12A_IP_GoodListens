@@ -1,25 +1,25 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/good-listens/node_modules
-/good-listens/.pnp
-/good-listens/.pnp.js
+node_modules
+.pnp
+.pnp.js
 
 # testing
-/good-listens/coverage
+coverage
 
 # production
-/good-listens/build
+build
 
 # misc
-/good-listens/.DS_Store
-/good-listens/.env.local
-/good-listens/.env.development.local
-/good-listens/.env.test.local
-/good-listens/.env.production.local
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-/good-listens/npm-debug.log*
-/good-listens/yarn-debug.log*
-/good-listens/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-/good-listens/src/components/.prettierrc
+/src/components/.prettierrc
