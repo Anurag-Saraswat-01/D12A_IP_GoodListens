@@ -62,9 +62,9 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
         <div className="card-text">
           <div className="song-header">
             <h2> {isNaN(click) ? '' : data.name} </h2>
-            <h6> Artist - {isNaN(click) ? '' : data.artist} </h6>
-            <h6> Album - {isNaN(click) ? '' : data.album} </h6>
-            <h6> Release Date - {isNaN(click) ? '' : data.release_date} </h6>
+            <h5> Artist - <span className="greyscale">{isNaN(click) ? '' : data.artist}</span> </h5>
+            <h5> Album - <span className="greyscale">{isNaN(click) ? '' : data.album}</span>  </h5>
+            <h5> Release Date - <span className="greyscale">{isNaN(click) ? '' : data.release_date}</span>  </h5>
           </div>
           <div className="ratings">
             <div className="rating-wrapper">
@@ -74,7 +74,7 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
             </div>
             <div className="rating-wrapper">
               <p> Overall Rating: </p>
-              <ReactStars count={1} size={20} edit={false} value={1} />
+              <ReactStars count={1} size={20} edit={false} value={1} className="react-star" />
               <p>{averageRating} ({totalUsers})</p>
             </div>
           </div>
