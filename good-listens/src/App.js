@@ -158,7 +158,7 @@ function App() {
     const db = database.getDatabase()
     const dbRef = database.ref(db)
     // enableIndexedDbPersistence(db)
-    database.get(database.child(dbRef, "spotify/")).then((snapshot) => {
+    database.onValue(database.child(dbRef, "spotify/"), (snapshot) => {
       if (snapshot.exists()) {
         // console.log(snapshot.val())
         const songs = snapshot.val()
