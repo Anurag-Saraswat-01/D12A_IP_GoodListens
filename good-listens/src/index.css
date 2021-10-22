@@ -108,9 +108,7 @@ h2 {
 .bodyContainer {
   padding: 3.5%;
   background-color: var(--bg-color);
-  /* changed here */
   position: relative; /* for overlay */
-  /* height: 115vh; fix this */
 }
 
 .tableContainer {
@@ -118,17 +116,11 @@ h2 {
   margin: 0 auto;
   width: 90%;
   background-color: var(--table-color);
-  /* changed here */
-  /* position: absolute; for overlay */
-  /* left: 5%; to center */
 }
 
 .col-md-3 {
   width: 23.5%;
   margin: 1% 0;
-  /* margin-top: 2.5%; */
-  /* margin-left: 13px;
-  margin-right: 13px; */
   padding: 0;
 }
 
@@ -175,11 +167,8 @@ span::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 10%; */
-  /* changed here */
   background-color: rgba(0 0 0 / 0.5); /* for opaque bg */
   position: absolute; /* for overlay */
-  /* border: 5px solid yellow; visibility */
   width: 100%;
   height: 100%;
   top: 0;
@@ -209,11 +198,14 @@ span::before {
 
 .song-header h6 {
   font-size: 14px;
-  /* font-weight: 400; */
   color: #fff;
 }
 
 .greyscale {
+  color: hsl(260, 4%, 65%);
+}
+
+.sign-in-warning {
   color: hsl(260, 4%, 65%);
 }
 
@@ -222,6 +214,10 @@ span::before {
   flex-direction: row;
   margin: auto;
   gap: 5px;
+}
+
+.react-stars {
+  margin-top: -5px;
 }
 
 .ratings p {
@@ -303,13 +299,10 @@ input:focus {
   border-bottom: 1px solid white;
 }
 
-
 /* about us  */
 
 .aboutUsContainer {
-  /* background-color: var(--table-color); */
   background-image: url("./images/album.jpg");
-  /* text-align: center; */
   background-size: 55%;
   padding: 120px 0;
   width: 100%;

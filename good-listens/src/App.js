@@ -2,15 +2,12 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import logo from './images/logo.png';
 import Table from "./components/Table";
-// import rock from "./images/rock.jpg";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import AboutUs from './components/AboutUs';
 import axios from 'axios'
+import { useState, useEffect } from 'react';
 import querystring from 'query-string'
-import './index.css';
 import { auth, provider, getAuth, database } from './components/Firebase';
 import { ref, set } from "firebase/database";
-import { useState, useEffect } from 'react';
-import AboutUs from './components/AboutUs';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
@@ -30,7 +27,6 @@ function App() {
   const client_id = "e92ebaa8a3d1456fb1ab78acfe75fec7"
   const client_secret = "f2cdafb887294ee1a158d5905cc89f4d"
 
-  // console.log("This is to be copied: "+btoa(client_id + ":" + client_secret))
   //Refreshing access token
   function refreshAccessToken() {
     const headers = {
@@ -39,14 +35,15 @@ function App() {
         'Authorization': 'Basic ' + btoa(client_id + ":" + client_secret)
       }
     };
+
     const data = {
       'grant_type': 'client_credentials',
       'refresh_token': refresh_token,
       'client_id': client_id
     };
+
     axios.post(TOKEN, querystring.stringify(data), headers)
       .then(response => {
-        // console.log(response.data);
         getSearchData(response.data.access_token)
       })
       .catch(error => console.log(error))
@@ -67,6 +64,7 @@ function App() {
         'Authorization': 'Bearer ' + access_token
       }
     }
+
     const response = await axios.get(search_url, headers)
     if (response.data) {
       let limit = response.data.tracks.limit;
@@ -89,19 +87,12 @@ function App() {
           if (searchTerm.length === 0) {
             setSongSearchData([])
           }
-          // console.log(arr);
-          // console.log(response.data);
 
         } catch (error) {
           console.log(error);
         }
       }
     }
-    // .then(response=>{
-    //   console.log(response.data);
-    //   setSongSearchData(response.data)
-    // })
-    // .catch(error=>console.log(error))
   }
 
   //Will refresh the accesstoken and search data if there is something in the searchbox
@@ -113,7 +104,6 @@ function App() {
 
 
   //Inserting data into Firebase on clicking the searchResults
-
   const insertData = async (track) => {
     const db = database.getDatabase()
     set(ref(db, "spotify/" + track.id), {
@@ -126,8 +116,6 @@ function App() {
       language: "English",
       url: track.url,
       user_rating: {},
-      // user_rating: ('user_rating' in songs[song] ? songs[song].user_rating : null)
-
     });
     console.log("Data added successfully");
   }
@@ -157,12 +145,9 @@ function App() {
   const getData = () => {
     const db = database.getDatabase()
     const dbRef = database.ref(db)
-    // enableIndexedDbPersistence(db)
     database.onValue(database.child(dbRef, "spotify/"), (snapshot) => {
       if (snapshot.exists()) {
-        // console.log(snapshot.val())
         const songs = snapshot.val()
-        // console.log(songs)
         let arr = []
         for (let song in songs) {
           arr.push({
@@ -222,7 +207,6 @@ function App() {
 
   //updating user rating
   const updateRating = (songid, rating) => {
-    // const songid = "a055cd69-ad9c-4563-a49a-7696f097bc4f"
     const db = database.getDatabase()
     const dbRef = database.ref(db)
     const data = {}
@@ -253,7 +237,6 @@ function App() {
             searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
         )} />
         <Route path="/about" component={AboutUs} />
-        {/* <AboutUs /> */}
         <Footer />
       </div>
     </Router>
@@ -261,7 +244,3 @@ function App() {
 }
 
 export default App;
-
-// code=AQDFAZ2sG65Kn7lix2_FNmoTZlf1t1quPf7Q0M6nsrSOQaOweQ4UWCX5odUoA5xyYkOceCJuJV6J2jvKi5Wzdc4raIUytAa35-hRZYVXFE4d_hnupd6NUSHMJSjWa8Uvx8plLyWkGrsfQJOarVSknPSly8thJHRtsj-pbwIfJLfa4Zr5n8D3Q6wZ7IZejDjJ2qKM3JAdlMLHd6toFg
-// state=RMDhxal9unJMbRjh
-

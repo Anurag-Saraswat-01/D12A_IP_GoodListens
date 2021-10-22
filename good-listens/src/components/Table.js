@@ -9,7 +9,7 @@ import { auth, provider, getAuth, database } from './Firebase';
 const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, searchResults, updateRating, user }) => {
 
   var dataID = []
-  for (let i = 0; i<dataArr.length; i++) {
+  for (let i = 0; i < dataArr.length; i++) {
     dataID.push(dataArr[i].id);
   }
   const [click, setClick] = useState(NaN);
@@ -17,7 +17,6 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
   const [pageNum, setPageNum] = useState(1)
   const [search, setSearch] = useState(false)
   //Filtering the data to be shown according to languages
-  // const filteredData = dataArr.filter(data => data.language === lang )
 
   //Calculating the maximum number of pages
   const max_pages = (filteredData.length % 12 === 0) ? filteredData.length / 12 : Math.round(filteredData.length / 12) + 1
@@ -38,7 +37,7 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
     }
   }
 
-  const insertData = async(track) => {
+  const insertData = async (track) => {
     const db = database.getDatabase()
     set(ref(db, "spotify/" + track.id), {
       album: track.album,
@@ -50,7 +49,6 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
       language: "undefined",
       url: track.url,
       user_rating: {}
-      // user_rating: ('user_rating' in songs[song] ? songs[song].user_rating : null)
     });
     console.log("Data added successfully");
   }
@@ -65,7 +63,8 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
       setSearch(true)
     }
   }, [searchTerm])
-  const handleClick = (data,key) => {
+
+  const handleClick = (data, key) => {
     setClick(key)
     if (dataID.includes(data.id)) {
       console.log("Data is already in Database");
@@ -80,13 +79,12 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
       insertData(data)
     }
   }
-  // console.log(click);
+  
   //card and searchCard are same but they are mapping pagedata and searchresults 
   const card = pageData.map((data, key) => {
     return (
       <div className="col-md-3" key={key}>
-        {/* handleClick(key, data) */}
-        <Card onClick={() => {setClick(key)} } >
+        <Card onClick={() => { setClick(key) }} >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark">
             <Card.Title className="center card-tile">{data.name}</Card.Title>
@@ -97,7 +95,6 @@ const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, se
   });
 
   const searchCard = searchResults.map((data, key) => {
-    // console.log(searchResults);
     return (
       <div className="col-md-3" key={key}>
         <Card onClick={() => handleClick(data, key)} >

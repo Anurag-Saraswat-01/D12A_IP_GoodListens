@@ -1,6 +1,5 @@
 import { FaFacebookF, FaGithub, FaTwitter } from 'react-icons/fa'
 
-
 const AboutUs = () => {
     return (
         <section className="about">

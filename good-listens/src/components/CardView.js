@@ -1,6 +1,6 @@
+import { useState, useEffect } from "react";
 import { FaRegWindowClose, FaHeadphones } from "react-icons/fa"
 import ReactStars from "react-rating-stars-component"
-import { useState, useEffect } from "react";
 
 const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
   const [totalUsers, setTotalUsers] = useState(0)
@@ -35,7 +35,7 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
   const rating = !isNaN(click) && data.user_rating && (uid in data.user_rating) ? data.user_rating[uid] : 0
   // returns a react-rating-stars-component if something is clicked, value depending on rating making it dynamic
   const ratingStars = !isNaN(click) ?
-    <ReactStars count={5} onChange={ratingChanged} size={20} isHalf={true} value={rating} /> : null
+    <ReactStars count={5} onChange={ratingChanged} size={20} isHalf={true} value={rating} classNames="react-stars" /> : null
 
   useEffect(() => {
     if (!isNaN(click) && data.user_rating) {

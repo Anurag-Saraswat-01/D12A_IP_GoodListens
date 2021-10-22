@@ -1,7 +1,6 @@
+import SearchBar from './SearchBar'
 import { Navbar, Container, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchBar from './SearchBar'
 
 const Header = ({ logo, user, login, logout, setlang, searchTerm, setSearchTerm, search }) => {
     return (
