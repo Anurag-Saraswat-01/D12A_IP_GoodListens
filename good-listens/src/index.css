@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Courier+Prime&family=Montserrat:wght@600&display=swap');
+
 :root {
   --navbar-color: #082032;
   --bg-color: #2C394B;
@@ -7,9 +9,8 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-size: 20px;
+  font-family: 'Courier Prime', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,13 +29,22 @@ code {
   padding-right: 0 !important;
 }
 
+h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+.card-title {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .navbar {
   padding: 0 !important;
+  font-family: 'Montserrat', sans-serif;
   background-color: var(--navbar-color) !important;
 }
 
 .navbar-brand {
-  font-size: 32px !important;
+  font-family: 'Courgette', cursive;
+  font-size: 40px !important;
 }
 
 #dropdown-basic-button {
@@ -151,6 +161,14 @@ code {
 }
 
 /*Card VIew*/
+
+span {
+  padding-top: 15px !important;
+}
+span::before {
+  padding-top: 15px !important;
+}
+
 .view
 {
   display: flex;
@@ -192,7 +210,11 @@ code {
 .song-header h6 {
   font-size: 14px;
   /* font-weight: 400; */
-  color: hsl(260, 4%, 65%)
+  color: #fff;
+}
+
+.greyscale {
+  color: hsl(260, 4%, 65%);
 }
 
 .rating-wrapper {
