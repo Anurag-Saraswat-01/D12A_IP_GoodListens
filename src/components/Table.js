@@ -1,8 +1,10 @@
-import { Card, Dropdown, DropdownButton } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
 import CardView from "./CardView";
+import { useState, useEffect } from "react";
 import { ref, set } from "firebase/database";
+import { database } from './Firebase';
+import { Card, Dropdown, DropdownButton } from "react-bootstrap";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
+
 
 
 const Table = ({ dataArr, searchTerm, lang, filteredData, setSortBy, setlang, searchResults, updateRating, user }) => {

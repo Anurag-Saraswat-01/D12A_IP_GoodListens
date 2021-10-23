@@ -3,12 +3,12 @@ import Footer from './components/Footer'
 import logo from './images/logo.png';
 import Table from "./components/Table";
 import AboutUs from './components/AboutUs';
-import axios from 'axios'
 import { useState, useEffect } from 'react';
-import querystring from 'query-string'
 import { auth, provider, getAuth, database } from './components/Firebase';
 import { ref, set } from "firebase/database";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import axios from 'axios'
+import querystring from 'query-string'
 
 
 // Subsequent queries will use persistence, if it was enabled successfully
@@ -232,11 +232,11 @@ function App() {
     <Router>
       <div className="container-fluid" onLoad={getData}>
         <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <Route path="/" exact render={() => (
+        <Route path="/D12A_IP_GoodListens" exact render={() => (
           <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)} setSortBy={setSortBy}
             searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
         )} />
-        <Route path="/about" component={AboutUs} />
+        <Route path="/D12A_IP_GoodListens/about" component={AboutUs} />
         <Footer />
       </div>
     </Router>
