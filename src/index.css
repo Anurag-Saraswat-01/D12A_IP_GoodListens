@@ -207,6 +207,7 @@ span::before {
 
 .sign-in-warning {
   color: hsl(260, 4%, 65%);
+  font-size: 0.8rem;
 }
 
 .rating-wrapper {
@@ -214,15 +215,19 @@ span::before {
   flex-direction: row;
   margin: auto;
   gap: 5px;
+  height: 40px;
+  align-items: center;
 }
 
 .react-stars {
-  margin-top: -5px;
+  margin-top: -15px;
 }
 
 .ratings p {
   height: 20px;
   margin: auto 0;
+  display: grid;
+  place-content: center;
 }
 
 .play-icon-wrapper {

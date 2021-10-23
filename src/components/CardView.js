@@ -10,7 +10,6 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
 
   const ratingChanged = (newrating) => {
     updateRating(data.id, newrating)
-    console.log(data)
     if (data.user_rating) {
       data.user_rating[uid] = newrating
     } else {
@@ -24,7 +23,7 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
       for (let rating in data.user_rating) {
         sum += data.user_rating[rating]
       }
-      setAverageRating(sum / totalUsers)
+      setAverageRating(parseFloat((sum / totalUsers).toFixed(1)))
     } else {
       setTotalUsers(0)
       setAverageRating(0)
@@ -44,7 +43,7 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
       for (let rating in data.user_rating) {
         sum += data.user_rating[rating]
       }
-      setAverageRating(sum / totalUsers)
+      setAverageRating(parseFloat((sum / totalUsers).toFixed(1)))
     } else {
       setTotalUsers(0)
       setAverageRating(0)

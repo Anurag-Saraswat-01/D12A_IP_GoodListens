@@ -15,10 +15,12 @@ const AboutUs = () => {
                         takes you to spotify web to enjoy your music.
 
                     </p>
-                    <h2>Connect Us On</h2>
+                    <h2>Contact Us On</h2>
                     <div className="container-fluid" >
-                        <FaFacebookF className="icons" size={30} />
+                        <a href="https://github.com/Anurag-Saraswat-01/D12A_IP_GoodListens" target="_blank" rel="noopener noreferrer"
+                            style={{ color: "white" }}></a>
                         <FaGithub className="icons" size={30} />
+                        <FaFacebookF className="icons" size={30} />
                         <FaTwitter className="icons" size={30} />
                     </div>
                 </div>

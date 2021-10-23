@@ -129,7 +129,6 @@ function App() {
           setUser(user)
         }
       })
-    console.log(user)
   }
 
   // logout function 
@@ -138,7 +137,6 @@ function App() {
       .then(() => {
         setUser(null)
       })
-    console.log(user.uid)
   }
 
   // Accesssing data from database
