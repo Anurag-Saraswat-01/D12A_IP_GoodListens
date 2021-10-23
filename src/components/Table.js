@@ -21,7 +21,7 @@ const Table = ({ dataArr, searchTerm, filteredData, setSortBy, setlang, searchRe
   //Filtering the data to be shown according to languages
 
   //Calculating the maximum number of pages
-  const max_pages = (filteredData.length % 8 === 0) ? filteredData.length / 8 : Math.round(filteredData.length / 8) + 1
+  const max_pages = (filteredData.length % 12 === 0) ? filteredData.length / 12 : Math.round(filteredData.length / 12) + 1
 
   const prevPage = () => {
     if (pageNum > 1) {
@@ -85,7 +85,7 @@ const Table = ({ dataArr, searchTerm, filteredData, setSortBy, setlang, searchRe
   //card and searchCard are same but they are mapping pagedata and searchresults 
   const card = pageData.map((data, key) => {
     return (
-      <div className="col-md-3" key={key}>
+      <div className="col-lg-3 col-md-6 col-sm-12" key={key}>
         <Card onClick={() => { setClick(key) }} >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark card-body">
@@ -98,7 +98,7 @@ const Table = ({ dataArr, searchTerm, filteredData, setSortBy, setlang, searchRe
 
   const searchCard = searchResults.map((data, key) => {
     return (
-      <div className="col-md-3" key={key}>
+      <div className="col-lg-3 col-md-6 col-sm-12" key={key}>
         <Card onClick={() => handleClick(data, key)} >
           <Card.Img variant="top" src={data.image} />
           <Card.Body className="bg-dark card-body">
@@ -121,7 +121,7 @@ const Table = ({ dataArr, searchTerm, filteredData, setSortBy, setlang, searchRe
 
   // updating the pageData as per pageNum
   useEffect(() => {
-    setPageData(filteredData.slice((pageNum - 1) * 8, ((pageNum - 1) * 8) + 8))
+    setPageData(filteredData.slice((pageNum - 1) * 12, ((pageNum - 1) * 12) + 12))
   }, [pageNum, filteredData])
 
   return (
