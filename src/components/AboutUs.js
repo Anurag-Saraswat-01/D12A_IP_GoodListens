@@ -13,13 +13,13 @@ const AboutUs = () => {
                     <p className="text">
                         If you wanna listen to your favourite song just click on the headphone button which directly
                         takes you to spotify web to enjoy your music.
-
                     </p>
                     <h2>Contact Us On</h2>
                     <div className="container-fluid" >
                         <a href="https://github.com/Anurag-Saraswat-01/D12A_IP_GoodListens" target="_blank" rel="noopener noreferrer"
-                            style={{ color: "white" }}></a>
-                        <FaGithub className="icons" size={30} />
+                            style={{ color: "white" }}>
+                            <FaGithub className="icons" size={30} />
+                        </a>
                         <FaFacebookF className="icons" size={30} />
                         <FaTwitter className="icons" size={30} />
                     </div>

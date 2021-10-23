@@ -36,6 +36,14 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
   const ratingStars = !isNaN(click) ?
     <ReactStars count={5} onChange={ratingChanged} size={20} isHalf={true} value={rating} classNames="react-stars" /> : null
 
+  const handleParentClick = () => {
+    setClick(NaN)
+  }
+
+  const handleChildClick = (e) => {
+    e.stopPropagation();
+  }
+
   useEffect(() => {
     if (!isNaN(click) && data.user_rating) {
       setTotalUsers(Object.keys(data.user_rating).length)
@@ -52,9 +60,10 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
 
   return (
     <div className="view child"
-      style={{ display: `${isNaN(click) ? "none" : "flex"}` }}>
-      <FaRegWindowClose className="closeIcon" onClick={() => setClick(NaN)} />
-      <div className="card-component">
+      style={{ display: `${isNaN(click) ? "none" : "flex"}` }}
+      onClick={(e) => handleParentClick()} >
+      {/* <FaRegWindowClose className="closeIcon" onClick={() => setClick(NaN)} /> */}
+      <div className="card-component" onClick={(e) => handleChildClick(e)}>
         <div className="card-img-wrapper">
           <img alt="card-img" src={isNaN(click) ? '' : data.image} className="card-img" />
         </div>
@@ -77,11 +86,11 @@ const CardView = ({ click, setClick, data, dataArr, updateRating, user }) => {
               <p>{averageRating} ({totalUsers})</p>
             </div>
           </div>
-          <div className="play-icon-wrapper">
-            <a href={isNaN(click) ? '/' : data.url} >
+          <a href={isNaN(click) ? '/' : data.url} >
+            <div className="play-icon-wrapper">
               <FaHeadphones className="play-icon" />
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>

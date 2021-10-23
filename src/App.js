@@ -232,7 +232,7 @@ function App() {
         <Header logo={logo} user={user} setlang={setLanguage} login={login} logout={logout} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Route path="/D12A_IP_GoodListens" exact render={() => (
           <Table dataArr={data} setlang={setLanguage} filteredData={data.filter(data => data.language === language)} setSortBy={setSortBy}
-            searchResults={songSearchData} lang={language} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
+            searchResults={songSearchData} searchTerm={searchTerm} updateRating={updateRating} user={user} insert={insertData} />
         )} />
         <Route path="/D12A_IP_GoodListens/about" component={AboutUs} />
         <Footer />
